@@ -1,7 +1,8 @@
 <?php
+include 'app.php';
 function authenticate($username, $password) {
     if(('marco' === $username) && ('Test1234' === $password)) {
-        echo '<script type="text/javascript">alert("Hello " + "' . $username . '")</script>';
+        main();
     } else {
         login('failed-attempt');
     }
