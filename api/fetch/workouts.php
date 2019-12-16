@@ -1,7 +1,10 @@
 <?php
 include '../../database.php';
 include '../../util.php';
+header("Access-Control-Allow-Origin: *");
+header("Content-Type: application/json; charset=UTF-8");
 $workouts = callDarebeeApi('https://darebee.com/media/com_jamegafilter/en_gb/1.json');
+$before = getWorkoutsAmount();
 foreach($workouts as $key => $workout) {
     $name = explode(':', $workout->slug)[1];
     $ui_name = $workout->name;
@@ -45,4 +48,9 @@ foreach($workouts as $key => $workout) {
     }
     createWorkout($name, $ui_name, $focus_id, $type_id, $difficulty_id);
 }
+$after = getWorkoutsAmount();
+$diff = ($after - $before);
+http_response_code(200);
+$response = array("total" => $after, "created" => $diff);
+echo json_encode($response);
 ?>

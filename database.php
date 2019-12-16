@@ -21,6 +21,11 @@ function query($sql) {
     }
 }
 
+function getWorkoutsAmount() {
+    $result = query('SELECT COUNT(*) AS C FROM workouts');
+    return $result->fetch_assoc()['C'];
+}
+
 function createWorkout($name, $ui_name, $focus_id, $type_id, $difficulty_id) {
     $select_query = 'SELECT id FROM workouts WHERE name = "' . $name . '"';
     $insert_query  = 'INSERT INTO workouts (name, ui_name, focus_id, type_id, difficulty_id) VALUES ("' . $name . '", "' . $ui_name . '", "' . $focus_id . '", "' . $type_id . '", "' . $difficulty_id . '")';

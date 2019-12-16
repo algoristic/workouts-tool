@@ -4,9 +4,10 @@ $(function() {
 
 refreshDataBase = () => {
     $.ajax({
-        url: 'https://workout.marco-leweke.de/api/fetch/workouts.php',
-        success: (result) => {
-            alert(result);
+        url: 'https://workout.marco-leweke.de/api/fetch/workouts',
+        success: (response) => {
+            let msgText = 'Fetched ' + response.created + ' new workouts (' + response.total + ' total)';
+            alert(msgText);
         }
     });
 }
