@@ -15,7 +15,6 @@ function getConnection() {
 function query($sql) {
     $connection = getConnection();
     try {
-        echo nl2br($sql . "\n");
         return $connection->query($sql);
     } finally {
         $connection->close();
