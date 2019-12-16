@@ -6,19 +6,53 @@ function getConnection() {
     $database = 'dbs241808';
     $connection = new mysqli($servername, $username, $password, $database);
     if ($connection->connect_error) {
-        die("Connection failed: database unreachable");
+        die("Connection failed: " . mysqli_connect_error());
     } else {
         return $connection;
     }
 }
 
-//$db = getConnection();
-//echo '<div id="wrapper">';
-//$sql = 'SELECT name, type, done FROM workouts';
-//$result = $db->query($sql);
-//if($result->num_rows > 0) {
-//    while($row = $result->fetch_assoc()) {
-//        echo 'name: ' . $row['name'] . '<br>';
-//    }
-//}
+function query($sql) {
+    $connection = getConnection();
+    try {
+        echo nl2br($sql . "\n");
+        return $connection->query($sql);
+    } finally {
+        $connection->close();
+    }
+}
+
+function createWorkout($name, $ui_name, $focus_id, $type_id, $difficulty_id) {
+    $select_query = 'SELECT id FROM workouts WHERE name = "' . $name . '"';
+    $insert_query  = 'INSERT INTO workouts (name, ui_name, focus_id, type_id, difficulty_id) VALUES ("' . $name . '", "' . $ui_name . '", "' . $focus_id . '", "' . $type_id . '", "' . $difficulty_id . '")';
+    return getIdOrCreateNew($select_query, $insert_query);
+}
+
+function fetchDifficulty($value, $ui_value) {
+    $select_query = 'SELECT id FROM diffculties WHERE value = "' . $value . '"';
+    $insert_query  = 'INSERT INTO diffculties (value, ui_value) VALUES ("' . $value . '", "' . $ui_value . '")';
+    return getIdOrCreateNew($select_query, $insert_query);
+}
+
+function fetchFocus($value, $ui_value) {
+    $select_query = 'SELECT id FROM focuses WHERE value = "' . $value . '"';
+    $insert_query  = 'INSERT INTO focuses (value, ui_value) VALUES ("' . $value . '", "' . $ui_value . '")';
+    return getIdOrCreateNew($select_query, $insert_query);
+}
+
+function fetchType($value, $ui_value) {
+    $select_query = 'SELECT id FROM types WHERE value = "' . $value . '"';
+    $insert_query  = 'INSERT INTO types (value, ui_value) VALUES ("' . $value . '", "' . $ui_value . '")';
+    return getIdOrCreateNew($select_query, $insert_query);
+}
+
+function getIdOrCreateNew($select_query, $insert_query) {
+    $result = query($select_query);
+    if($result->num_rows > 0) {
+        return $result->fetch_assoc()['id'];
+    } else {
+        query($insert_query);
+        return getIdOrCreateNew($select_query, $insert_query);
+    }
+}
 ?>
