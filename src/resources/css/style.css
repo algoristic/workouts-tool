@@ -21,3 +21,6 @@
     width: 5rem;
     height: 5rem;
 }
+.card-header.nav {
+    padding: .25rem .25rem 0;
+}

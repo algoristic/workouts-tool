@@ -10,35 +10,12 @@
     <body class="container">
         <?php include 'assets.php'; ?>
         <?php if(authenticate()): ?>
-            <ul class="nav nav-tabs" role="tablist">
-                <li class="nav-item">
-                    <a class="nav-link active" href="#system" data-toggle="tab">System</a>
-                </li>
-            </ul>
-            <div class="tab-content">
-                <div id="system" class="tab-pane active">
-                    <button id="refreshDataBase" type="button" class="btn btn-primary">Fetch New Data From darebee.com</button>
-                </div>
-            </div>
+            <?php include './content/app.php'; ?>
             <div id="loader" class="d-none">
                 <div class="loading-icon spinner-grow text-primary"></div>
             </div>
         <?php else: ?>
-            <!-- load login -->
-            <div id="login-card" class="card mt-2">
-                <div class="card-header">
-                    <h2>Login</h2>
-                </div>
-                <form action="index.php" method="post">
-                <div class="card-body">
-                    <input class="form-control mb-2" type="text" name="username" placeholder="Username">
-                    <input class="form-control" type="password" name="password" placeholder="Password">
-                </div>
-                <div class="card-footer">
-                    <input class="btn btn-primary" type="submit" value="Submit">
-                </div>
-                </form>
-            </div>
+            <?php include './content/login.php'; ?>
         <?php endif ?>
         <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
