@@ -20,10 +20,8 @@
                     <button id="refreshDataBase" type="button" class="btn btn-primary">Fetch New Data From darebee.com</button>
                 </div>
             </div>
-            <div id="loader">
-                <div class="loading-icon spinner-grow text-primary">
-
-                </div>
+            <div id="loader" class="d-none">
+                <div class="loading-icon spinner-grow text-primary"></div>
             </div>
         <?php else: ?>
             <!-- load login -->
