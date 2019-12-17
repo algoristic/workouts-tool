@@ -26,6 +26,22 @@ function getWorkoutsAmount() {
     return $result->fetch_assoc()['C'];
 }
 
+function getAllWorkouts() {
+    return query('
+        SELECT
+            w.name AS id,
+            w.ui_name AS name,
+            t.ui_value AS type,
+            f.ui_value AS focus,
+            d.ui_value AS difficulty
+        FROM
+            workouts w
+            LEFT JOIN types t ON w.type_id = t.id
+            LEFT JOIN focuses f ON w.focus_id = f.id
+            LEFT JOIN diffculties d ON w.difficulty_id = d.id
+    ');
+}
+
 function createWorkout($name, $ui_name, $focus_id, $type_id, $difficulty_id) {
     $select_query = 'SELECT id FROM workouts WHERE name = "' . $name . '"';
     $insert_query  = 'INSERT INTO workouts (name, ui_name, focus_id, type_id, difficulty_id) VALUES ("' . $name . '", "' . $ui_name . '", "' . $focus_id . '", "' . $type_id . '", "' . $difficulty_id . '")';

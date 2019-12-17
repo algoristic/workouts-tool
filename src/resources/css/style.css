@@ -1,3 +1,6 @@
+body {
+    font-size: .8rem;
+}
 #login-card {
     margin: 0 auto;
     max-width: 768px;
@@ -21,6 +24,28 @@
     width: 5rem;
     height: 5rem;
 }
+#preview-frame-desktop {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    border-radius: 5px;
+}
+#preview-frame-desktop img {
+    height: auto;
+    width: 250px;
+    border-radius: 5px;
+    box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.75);
+}
 .card-header.nav {
     padding: .2rem .25rem 0;
+}
+@media screen and (max-width: 767px) {
+    .container {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .card-body {
+        padding-left: 0;
+        padding-right: 0;
+    }
 }

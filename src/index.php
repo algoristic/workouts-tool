@@ -10,6 +10,7 @@
     </head>
     <body class="container">
         <?php include 'assets.php'; ?>
+        <?php include 'database.php'; ?>
         <?php if(authenticate()): ?>
             <?php include './content/app.php'; ?>
             <div id="loader" class="d-none">
