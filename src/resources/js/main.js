@@ -13,7 +13,12 @@ $(function() {
 
     isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     if(isMobile) {
-
+        $('.hover-preview').click(function() {
+            let workout = $(this).attr('id');
+            let src = './media/workouts/' + workout + '/preview.jpg';
+            $('#preview-frame-mobile img').attr('src', src);
+            $('#preview-frame-mobile').modal();
+        });
     } else {
         $('.hover-preview').mouseenter(function() {
             let workout = $(this).attr('id');

@@ -1,4 +1,4 @@
-<table id="workouts-table" class="table" style="width:100%">
+<table id="workouts-table" class="table">
     <thead>
         <tr>
             <th>Name</th>
@@ -22,5 +22,17 @@
     </tbody>
 </table>
 <div id="preview-frame-desktop" class="d-none">
-    <img src="" alt="Dark Elf Workout">
+    <img src="" alt="Preview">
+</div>
+<div id="preview-frame-mobile" class="modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body d-flex justify-content-center">
+                <img src="" alt="Preview">
+            </div>
+            <div class="modal-footer">
+
+            </div>
+        </div>
+    </div>
 </div>
