@@ -1,6 +1,6 @@
-$(function() {
-    $('#refreshDataBase').click(refreshDataBase());
-});
+//$(function() {
+//    $('#refreshDataBase').on('click', refreshDataBase());
+//});
 
 refreshDataBase = () => {
     $.ajax({

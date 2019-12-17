@@ -10,8 +10,21 @@
     <body class="container">
         <?php include 'assets.php'; ?>
         <?php if(authenticate()): ?>
-            <!-- load app -->
-            <button id="refreshDataBase" type="button">Fetch New Data From darebee.com</button>
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#system" data-toggle="tab">System</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div id="system" class="tab-pane active">
+                    <button id="refreshDataBase" type="button" class="btn btn-primary">Fetch New Data From darebee.com</button>
+                </div>
+            </div>
+            <div id="loader">
+                <div class="loading-icon spinner-grow text-primary">
+
+                </div>
+            </div>
         <?php else: ?>
             <!-- load login -->
             <div id="login-card" class="card mt-2">
