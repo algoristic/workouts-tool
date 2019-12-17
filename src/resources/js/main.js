@@ -1,13 +1,21 @@
 isMobile = false;
 
+function load() {
+    $('#loader').removeClass('d-none');
+}
+
+function ready() {
+    $('#loader').addClass('d-none');
+}
+
 $(function() {
     $('#refreshDataBase').click(function() {
-        $('#loader').removeClass('d-none');
+        load();
         $.ajax({
             url: 'https://workout.marco-leweke.de/api/fetch/workouts'
         }).done((response) => {
             alert('Fetched ' + response.created + ' new workouts (' + response.total + ' total)');
-            $('#loader').addClass('d-none');
+            ready();
         });
     });
 

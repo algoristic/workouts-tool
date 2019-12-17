@@ -27,6 +27,7 @@
 <div id="preview-frame-mobile" class="modal">
     <div class="modal-dialog">
         <div class="modal-content">
+            <button type="button" class="close absolute-close" data-dismiss="modal">&times;</button>
             <div class="modal-body d-flex justify-content-center">
                 <img src="" alt="Preview">
             </div>
