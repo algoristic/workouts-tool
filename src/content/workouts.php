@@ -27,12 +27,13 @@
 <div id="preview-frame-mobile" class="modal">
     <div class="modal-dialog">
         <div class="modal-content">
-            <button type="button" class="close absolute-close" data-dismiss="modal">&times;</button>
-            <div class="modal-body d-flex justify-content-center">
-                <img src="" alt="Preview">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
-            <div class="modal-footer">
-
+            <div class="modal-body d-flex justify-content-center">
+                <button id="go-back" type="button" class="btn btn-light preview-btn" preview-target="">&#x25c4;</button>
+                <img src="" alt="Preview">
+                <button id="go-forward" type="button" class="btn btn-light preview-btn" preview-target="">&#x25ba;</button>
             </div>
         </div>
     </div>
