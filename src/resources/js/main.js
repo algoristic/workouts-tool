@@ -35,9 +35,11 @@ function setNavigation(workout) {
     }
     //set preview image
     let src = './media/workouts/' + workout + '/preview.jpg';
+    let darebeeLink = 'https://darebee.com/workouts/' + workout;
     $('#preview-frame-mobile img').attr('src', src);
+    $('#preview-darebee-link').attr('href', darebeeLink);
     //set go-forward button
-    if(index >= currentRows) {
+    if(index >= (currentRows - 1)) {
         $('#go-forward').prop('disabled', true);
     } else {
         $('#go-forward').prop('disabled', false);

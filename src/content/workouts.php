@@ -28,6 +28,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
+                <a id="preview-darebee-link" href="https://darebee.com/workouts/dark-elf-workout/" target="_blank">Open @darebee</a>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body d-flex justify-content-center">
