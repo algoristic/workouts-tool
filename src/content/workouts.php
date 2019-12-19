@@ -42,15 +42,15 @@
                                     <tbody>
                                         <tr>
                                             <th>Type</th>
-                                            <td id="info-workout-type">Cardio / High burn</td>
+                                            <td id="info-workout-type"></td>
                                         </tr>
                                         <tr>
                                             <th>Focus</th>
-                                            <td id="info-workout-focus">Full-body</td>
+                                            <td id="info-workout-focus"></td>
                                         </tr>
                                         <tr>
                                             <th>Difficulty</th>
-                                            <td id="info-workout-difficulty">5 - advanced</td>
+                                            <td id="info-workout-difficulty"></td>
                                         </tr>
                                     </tbody>
                                 </table>
