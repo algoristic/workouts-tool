@@ -59,10 +59,10 @@
                     </div>
                 </div>
             </div>
-            <div class="modal-footer">
-                <button id="add-to-rotation" type="button" class="btn btn-primary btn-block" rotation-target="">Add to rotation&nbsp;&#x2192;</button>
-                <button id="remove-from-rotation" type="button" class="btn btn-danger btn-block" rotation-target="">&#x2190;&nbsp;Remove from rotation</button>
-            </div>
+            <!--<div class="modal-footer">-->
+                <!--<button id="add-to-rotation" type="button" class="btn btn-primary btn-block" rotation-target="">Add to rotation&nbsp;&#x2192;</button>-->
+                <!--<button id="remove-from-rotation" type="button" class="btn btn-danger btn-block" rotation-target="">&#x2190;&nbsp;Remove from rotation</button>-->
+            <!--</div>-->
         </div>
     </div>
 </div>
