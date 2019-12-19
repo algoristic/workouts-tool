@@ -94,4 +94,10 @@ body {
     .img-muscles {
         padding-top: 25px;
     }
+    .mobile-fullscreen .modal-dialog {
+        margin: 0;
+    }
+    .mobile-fullscreen .modal-content {
+        border-radius: 0;
+    }
 }

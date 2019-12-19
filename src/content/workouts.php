@@ -21,7 +21,7 @@
         <?php endif ?>
     </tbody>
 </table>
-<div id="info-modal" class="workout-modal modal">
+<div id="info-modal" class="mobile-fullscreen workout-modal modal">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
