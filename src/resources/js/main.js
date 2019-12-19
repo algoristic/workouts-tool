@@ -10,10 +10,20 @@ function ready() {
     $('#loader').addClass('d-none');
 }
 
-function getPreview(elem) {
-    let workout = elem.attr('id');
-    let src = './media/workouts/' + workout + '/preview.jpg';
-    return src;
+function getWorkoutMediaLink(workout) {
+    return './media/workouts/' + workout;
+}
+
+function getPreviewLink(workout) {
+    return (getWorkoutMediaLink(workout) + '/preview.jpg');
+}
+
+function getInstructionLink(workout) {
+    return (getWorkoutMediaLink(workout) + '/instructions.jpg');
+}
+
+function getMusclesLink(workout) {
+    return (getWorkoutMediaLink(workout) + '/muscles.jpg');
 }
 
 function setNavigation(workout) {
@@ -25,6 +35,8 @@ function setNavigation(workout) {
             break;
         }
     }
+    $('#show-details').attr('details-target', workout);
+    $('#preview-frame-mobile img').attr('details-target', workout);
     //set go-back button
     if(index <= 0) {
         $('#go-back').prop('disabled', true);
@@ -34,7 +46,7 @@ function setNavigation(workout) {
         $('#go-back').attr('preview-target', goBackTarget);
     }
     //set preview image
-    let src = './media/workouts/' + workout + '/preview.jpg';
+    let src = getPreviewLink(workout);
     let darebeeLink = 'https://darebee.com/workouts/' + workout;
     $('#preview-frame-mobile img').attr('src', src);
     $('#preview-darebee-link').attr('href', darebeeLink);
@@ -46,6 +58,30 @@ function setNavigation(workout) {
         let goForwardTarget = visibleWorkouts[index + 1];
         $('#go-forward').attr('preview-target', goForwardTarget);
     }
+}
+
+function openInfoModal(workout) {
+    let instructionsLink = getInstructionLink(workout);
+    $('#detailed-instructions').attr('src', instructionsLink);
+    let musclesLink = getMusclesLink(workout);
+    $('.img-muscles').attr('src', musclesLink);
+    info = gatherWorkoutInfos(workout);
+    $('#detailed-instructions').attr('alt', info.name);
+    $('.img-muscles').attr('alt', (info.name + ' Muscles'));
+    $('#info-workout-type').text(info.type);
+    $('#info-workout-focus').text(info.focus);
+    $('#info-workout-difficulty').text(info.difficulty);
+    $('#info-modal').modal();
+}
+
+function gatherWorkoutInfos(workout) {
+    let info = {};
+    let row = $('#' + workout);
+    info.name = row.find('.workout-name strong').text();
+    info.type = row.find('.type-col').text();
+    info.focus = row.find('.focus-col').text();
+    info.difficulty = row.find('.difficulty-col').text();
+    return info;
 }
 
 $(function() {
@@ -74,14 +110,23 @@ $(function() {
         $('#go-back, #go-forward').click(function() {
             setNavigation($(this).attr('preview-target'));
         });
+        $('#show-details, #preview-frame-mobile img').click(function() {
+            let workout = $(this).attr('details-target');
+            $('#preview-frame-mobile').modal('hide');
+            openInfoModal(workout);
+        })
     } else {
         $('.hover-preview').mouseenter(function() {
-            let src = getPreview($(this));
+            let src = getPreviewLink($(this).attr('id'));
             $('#preview-frame-desktop img').attr('src', src);
             $('#preview-frame-desktop').removeClass('d-none');
         });
         $('.hover-preview').mouseleave(function() {
             $('#preview-frame-desktop').addClass('d-none');
+        });
+        $('#workouts-table .workout-name').click(function() {
+            let workout = $(this).attr('details-target');
+            openInfoModal(workout);
         });
     }
 
