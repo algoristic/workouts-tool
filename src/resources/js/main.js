@@ -32,6 +32,7 @@ function getMusclesLink(workout) {
 }
 
 function setNavigation(workout) {
+    $('#preview-frame-mobile img').attr('src', '');
     let index = 0;
     for(i = 0; i < visibleWorkouts.length; i++) {
         let currentWorkout = visibleWorkouts[i];
@@ -66,6 +67,7 @@ function setNavigation(workout) {
 }
 
 function openInfoModal(workout) {
+    $('#detailed-instructions').attr('src', '');
     let instructionsLink = getInstructionLink(workout);
     $('#detailed-instructions').attr('src', instructionsLink);
     let musclesLink = getMusclesLink(workout);
@@ -129,6 +131,7 @@ $(function() {
             $('#preview-frame-desktop').removeClass('d-none');
         });
         $('.hover-preview').mouseleave(function() {
+            $('#preview-frame-desktop img').attr('src', '');
             $('#preview-frame-desktop').addClass('d-none');
         });
         $('#workouts-table .workout-name').click(function() {

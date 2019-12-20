@@ -35,7 +35,7 @@
                     <div class="col-md-6">
                         <div class="row">
                             <div class="col-12 d-flex justify-content-center">
-                                <img class="img-muscles img-fluid mx-2" src="" alt="">
+                                <img class="img-muscles img-fluid m-2" src="" alt="">
                             </div>
                             <div class="col-12">
                                 <table class="workout-table table table-borderless">
