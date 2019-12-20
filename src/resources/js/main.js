@@ -10,6 +10,11 @@ function ready() {
     $('#loader').addClass('d-none');
 }
 
+function htmlDecode(input) {
+  var doc = new DOMParser().parseFromString(input, "text/html");
+  return doc.documentElement.textContent;
+}
+
 function getWorkoutMediaLink(workout) {
     return './media/workouts/' + workout;
 }
@@ -71,12 +76,14 @@ function openInfoModal(workout) {
     $('#info-workout-type').text(info.type);
     $('#info-workout-focus').text(info.focus);
     $('#info-workout-difficulty').text(info.difficulty);
+    $('#workout-description').html(htmlDecode(info.description));
     $('#info-modal').modal();
 }
 
 function gatherWorkoutInfos(workout) {
     let info = {};
     let row = $('#' + workout);
+    info.description = row.attr('workout-description');
     info.name = row.find('.workout-name strong').text();
     info.type = row.find('.type-col').text();
     info.focus = row.find('.focus-col').text();

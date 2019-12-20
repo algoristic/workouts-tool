@@ -2,6 +2,7 @@ CREATE TABLE workouts (
     id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 	name VARCHAR(255) NOT NULL,
     ui_name VARCHAR(255) NOT NULL,
+    description TEXT, 
     type_id INT(6) UNSIGNED NOT NULL,
     focus_id INT(6) UNSIGNED NOT NULL,
     difficulty_id INT(6) UNSIGNED NOT NULL

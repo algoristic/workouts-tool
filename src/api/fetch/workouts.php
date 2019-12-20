@@ -10,6 +10,15 @@ foreach($workouts as $key => $workout) {
     $name = explode(':', $workout->slug)[1];
     $ui_name = $workout->name;
     $ui_name = addslashes($ui_name);
+    $description = null;
+    {
+        $url = 'https://darebee.com/workouts/' . $name;
+        $html = getHTML($url, 10);
+        preg_match('/<div class="infotext">(.*)<\/div>/', $html, $match);
+        $description = $match[1];
+        $description = trimWhitespace($description);
+        $description = addslashes($description);
+    }
     $attrs = $workout->attr;
     $difficulty = $attrs->ct14;
     $difficulty_id = null;
@@ -50,7 +59,7 @@ foreach($workouts as $key => $workout) {
             continue;
         }
     }
-    createWorkout($name, $ui_name, $focus_id, $type_id, $difficulty_id);
+    createWorkout($name, $ui_name, $description, $focus_id, $type_id, $difficulty_id);
     archiveWorkoutData($name, $focus, $type, $difficulty);
 }
 $after = getWorkoutsAmount();

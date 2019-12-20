@@ -1,6 +1,6 @@
 <?php
 function getConnection() {
-    $servername = 'db5000247540.hosting-data.io:3306';
+    $servername = 'db5000247540.hosting-data.io:3306'; //MEMO: enter persistent mode with prefix of "p:"
     $username = 'dbu127642';
     $password = '_4Wm]8keX1K_hC(7V((M';
     $database = 'dbs241808';
@@ -13,6 +13,7 @@ function getConnection() {
 }
 
 function query($sql) {
+    //echo ('QUERY=["' . $sql . '"], ');
     $connection = getConnection();
     try {
         return $connection->query($sql);
@@ -31,6 +32,7 @@ function getAllWorkouts() {
         SELECT
             w.name AS id,
             w.ui_name AS name,
+            w.description AS description,
             t.ui_value AS type,
             f.ui_value AS focus,
             d.ui_value AS difficulty
@@ -42,9 +44,9 @@ function getAllWorkouts() {
     ');
 }
 
-function createWorkout($name, $ui_name, $focus_id, $type_id, $difficulty_id) {
+function createWorkout($name, $ui_name, $description, $focus_id, $type_id, $difficulty_id) {
     $select_query = 'SELECT id FROM workouts WHERE name = "' . $name . '"';
-    $insert_query  = 'INSERT INTO workouts (name, ui_name, focus_id, type_id, difficulty_id) VALUES ("' . $name . '", "' . $ui_name . '", "' . $focus_id . '", "' . $type_id . '", "' . $difficulty_id . '")';
+    $insert_query  = 'INSERT INTO workouts (name, ui_name, description, focus_id, type_id, difficulty_id) VALUES ("' . $name . '", "' . $ui_name . '", "' . $description . '", "' . $focus_id . '", "' . $type_id . '", "' . $difficulty_id . '")';
     return getIdOrCreateNew($select_query, $insert_query);
 }
 

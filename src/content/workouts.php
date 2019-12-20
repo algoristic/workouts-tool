@@ -11,7 +11,7 @@
         <?php $workouts = getAllWorkouts(); ?>
         <?php if($workouts->num_rows > 0): ?>
             <?php foreach ($workouts as $key => $workout): ?>
-                <tr id="<?php echo $workout['id'] ?>" class="hover-preview">
+                <tr id="<?php echo $workout['id'] ?>" class="hover-preview" workout-description="<?php echo htmlspecialchars($workout['description']) ?>">
                     <td class="workout-name" details-target="<?php echo $workout['id'] ?>" title="Show details on <?php echo $workout['id'] ?>"><strong><?php echo $workout['name'] ?></strong></td>
                     <td class="type-col"><?php echo $workout['type'] ?></td>
                     <td class="focus-col"><?php echo $workout['focus'] ?></td>
@@ -35,7 +35,7 @@
                     <div class="col-md-6">
                         <div class="row">
                             <div class="col-12 d-flex justify-content-center">
-                                <img class="img-muscles img-fluid" src="" alt="">
+                                <img class="img-muscles img-fluid mx-2" src="" alt="">
                             </div>
                             <div class="col-12">
                                 <table class="workout-table table table-borderless">
@@ -56,6 +56,9 @@
                                 </table>
                             </div>
                         </div>
+                    </div>
+                    <div class="col-12 text-left mt-2">
+                        <div id="workout-description"></div>
                     </div>
                 </div>
             </div>

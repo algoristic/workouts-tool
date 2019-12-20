@@ -20,7 +20,7 @@ body {
     margin: 0;
     position: absolute;
     top: 50%;
-    left: 50%;
+    left: calc(50% - 2.5rem);
     transform: inherit translate(-50%, -50%);
     width: 5rem;
     height: 5rem;
