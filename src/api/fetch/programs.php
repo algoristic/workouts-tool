@@ -8,7 +8,9 @@ include '../../database.php';
 include '../../util.php';
 include '../../archive.php';
 header("Access-Control-Allow-Origin: *");
-//header("Content-Type: application/json; charset=UTF-8");
+if(!$debug) {
+    header("Content-Type: application/json; charset=UTF-8");
+}
 $programs = callDarebeeApi('https://darebee.com/media/com_jamegafilter/en_gb/3.json');
 $counter = 0;
 foreach ($programs as $key => $program) {

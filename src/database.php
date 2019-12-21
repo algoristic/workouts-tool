@@ -50,7 +50,8 @@ function workoutIsInDatabase($name) {
 }
 
 function createWorkout($name, $ui_name, $description, $focus_id, $type_id, $difficulty_id) {
-    query('INSERT INTO workouts (name, ui_name, description, focus_id, type_id, difficulty_id) VALUES ("' . $name . '", "' . $ui_name . '", "' . $description . '", "' . $focus_id . '", "' . $type_id . '", "' . $difficulty_id . '")');
+    $insert_query = 'INSERT INTO workouts (name, ui_name, description, focus_id, type_id, difficulty_id) VALUES ("' . $name . '", "' . $ui_name . '", "' . $description . '", "' . $focus_id . '", "' . $type_id . '", "' . $difficulty_id . '")';
+    query($insert_query);
 }
 
 function fetchDifficulty($value, $ui_value) {

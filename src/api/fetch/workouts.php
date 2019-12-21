@@ -8,7 +8,9 @@ include '../../database.php';
 include '../../util.php';
 include '../../archive.php';
 header("Access-Control-Allow-Origin: *");
-header("Content-Type: application/json; charset=UTF-8");
+if(!$debug) {
+    header("Content-Type: application/json; charset=UTF-8");
+}
 $workouts = callDarebeeApi('https://darebee.com/media/com_jamegafilter/en_gb/1.json');
 $before = getWorkoutsAmount();
 $counter = 0;
