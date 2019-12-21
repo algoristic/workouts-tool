@@ -80,7 +80,6 @@ function gatherWorkoutInfos(workout) {
 }
 
 $(function() {
-    addStylesheet('workout-style', '/resources/css/workouts.css');
     if(isMobile()) {
         $('.hover-preview').click(function() {
             let elem = $(this);
