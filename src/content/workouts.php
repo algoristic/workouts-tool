@@ -89,3 +89,4 @@
         </div>
     </div>
 </div>
+<script src="./resources/js/workouts.js"></script>
