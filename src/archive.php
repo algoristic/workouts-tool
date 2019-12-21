@@ -14,6 +14,8 @@ function archiveProgramData($name, $url_name, $days) {
             echo ('original intro-file: ' . $original . '<br/>');
             //copyImage($original, $intro_file);
         }
+        $foundAppendix = False;
+        $appendix = '';
         for($i = 1; $i <= $days; $i++) {
             $day_img = $program_dir . '/day-' . $i . '.jpg';
             echo ('day-image: ' . $day_img . '<br/>');
@@ -24,16 +26,21 @@ function archiveProgramData($name, $url_name, $days) {
                 }
                 //days can be /day or /chapter !!! -> but '/day' is good enough in the fist place, since the rest can be added later!
 
-                foreach (array('web', 'pages', '2019') as $appendix) {
-                    //darebee use multiple different appendices here, which are not possible to be determined before...
-                    $original = 'https://darebee.com/images/programs/' . $url_name . '/' . $appendix . '/day' . $urlDayAppendix . '.jpg';
-                    echo ('original day-image: ' . $original . '<br/>');
-                    if(isImage($original)) {
-                        echo 'found appendix: ' . $appendix . '<br/>';
-                        //copyImage($original, $day_img);
-                        break;
+                if(!$foundAppendix) {
+                    foreach (array('web', 'pages', '2019') as $test) {
+                        //darebee use multiple different appendices here, which are not possible to be determined before...
+                        $original = 'https://darebee.com/images/programs/' . $url_name . '/' . $test . '/day' . $urlDayAppendix . '.jpg';
+                        echo ('original day-image: ' . $original . '<br/>');
+                        if(isImage($original)) {
+                            echo 'found appendix: ' . $test . '<br/>';
+                            $foundAppendix = True;
+                            $appendix = $test;
+                            //copyImage($original, $day_img);
+                            break;
+                        }
                     }
                 }
+                //TODO: work further with found appendix
             }
         }
         echo ('- - - -END- - - -<br/>');

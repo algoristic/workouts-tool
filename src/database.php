@@ -44,10 +44,13 @@ function getAllWorkouts() {
     ');
 }
 
+function workoutIsInDatabase($name) {
+    $result = query('SELECT id FROM workouts WHERE name = "' . $name . '"');
+    return ($result->num_rows > 0);
+}
+
 function createWorkout($name, $ui_name, $description, $focus_id, $type_id, $difficulty_id) {
-    $select_query = 'SELECT id FROM workouts WHERE name = "' . $name . '"';
-    $insert_query  = 'INSERT INTO workouts (name, ui_name, description, focus_id, type_id, difficulty_id) VALUES ("' . $name . '", "' . $ui_name . '", "' . $description . '", "' . $focus_id . '", "' . $type_id . '", "' . $difficulty_id . '")';
-    return getIdOrCreateNew($select_query, $insert_query);
+    query('INSERT INTO workouts (name, ui_name, description, focus_id, type_id, difficulty_id) VALUES ("' . $name . '", "' . $ui_name . '", "' . $description . '", "' . $focus_id . '", "' . $type_id . '", "' . $difficulty_id . '")');
 }
 
 function fetchDifficulty($value, $ui_value) {
