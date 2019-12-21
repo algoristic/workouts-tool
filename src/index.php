@@ -14,8 +14,8 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
-        <script src="./resources/js/requestParams.js"></script>
-        <script src="./resources/js/main.js"></script>
+        <script src="/resources/js/requestParams.js"></script>
+        <script src="/resources/js/main.js"></script>
     </head>
     <body class="container">
         <?php include 'assets.php'; ?>
