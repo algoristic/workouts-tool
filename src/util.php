@@ -36,4 +36,54 @@ function getHTML($url,$timeout)
 function trimWhitespace($s) {
     return ltrim(rtrim($s));
 }
+
+function trimSlug($slug) {
+    return explode(':', $slug)[1];
+}
+
+function getUiName($name) {
+    return addslashes($name);
+}
+
+function getUrlName($url) {
+    return explode('/', $url)[2];
+}
+
+function extractTextFromPage($url, $query) {
+    $html = getHTML($url, 10);
+    @$dom = DOMDocument::loadHTML($html);
+    $xpath = new DOMXpath($dom);
+    $results = $xpath->query($query);
+    $result = '';
+    foreach($results as $key => $paragraph) {
+        $result .= $paragraph->nodeValue . '<br/><br/>';
+    }
+    return addslashes($result);
+}
+
+function isImage($url) {
+    //return is_array(getimagesize($url));
+    $params = array('http' => array('method' => 'HEAD'));
+    $ctx = stream_context_create($params);
+    $fp = @fopen($url, 'rb', false, $ctx);
+    if (!$fp) {
+        return false;
+    }
+    $meta = stream_get_meta_data($fp);
+    if ($meta === false) {
+        fclose($fp);
+        return false;
+    }
+    $wrapper_data = $meta["wrapper_data"];
+    if(is_array($wrapper_data)) {
+      foreach(array_keys($wrapper_data) as $hh) {
+          if (substr($wrapper_data[$hh], 0, 19) == "Content-Type: image") {
+            fclose($fp);
+            return true;
+          }
+      }
+    }
+    fclose($fp);
+    return false;
+  }
 ?>

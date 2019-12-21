@@ -7,17 +7,13 @@ header("Content-Type: application/json; charset=UTF-8");
 $workouts = callDarebeeApi('https://darebee.com/media/com_jamegafilter/en_gb/1.json');
 $before = getWorkoutsAmount();
 foreach($workouts as $key => $workout) {
-    $name = explode(':', $workout->slug)[1];
-    $ui_name = $workout->name;
-    $ui_name = addslashes($ui_name);
+    $name = trimSlug($workout->slug);
+    $ui_name = getUiName($workout->name);
     $description = null;
     {
         $url = 'https://darebee.com/workouts/' . $name;
-        $html = getHTML($url, 10);
-        preg_match('/<div class="infotext">(.*)<\/div>/', $html, $match);
-        $description = $match[1];
-        $description = trimWhitespace($description);
-        $description = addslashes($description);
+        $xPathQuery = '//div[contains(@class, "infotext")]';
+        $description = extractTextFromPage($url, $xPathQuery);
     }
     $attrs = $workout->attr;
     $difficulty = $attrs->ct14;

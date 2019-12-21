@@ -1,4 +1,44 @@
 <?php
+function archiveProgramData($name, $url_name, $days) {
+    echo ('- - - START - - -<br/>');
+    $media_dir = '../../media';
+    {
+        $program_dir = $media_dir . '/programs/' . $name;
+        if(!file_exists($program_dir)) {
+            //mkdir($program_dir, 0705, true);
+        }
+        $intro_file = $program_dir . '/intro.jpg';
+        echo ('intro-file: ' . $intro_file . '<br/>');
+        if(!file_exists($intro_file)) {
+            $original = 'https://darebee.com/images/programs/' . $url_name . '/' . $name . '-intro.jpg';
+            echo ('original intro-file: ' . $original . '<br/>');
+            //copyImage($original, $intro_file);
+        }
+        for($i = 1; $i <= $days; $i++) {
+            $day_img = $program_dir . '/day-' . $i . '.jpg';
+            echo ('day-image: ' . $day_img . '<br/>');
+            if(!file_exists($day_img)) {
+                $urlDayAppendix = $i;
+                if($i < 10) {
+                    $urlDayAppendix = '0' . $urlDayAppendix;
+                }
+                //days can be /day or /chapter !!! -> but '/day' is good enough in the fist place, since the rest can be added later!
+
+                foreach (array('web', 'pages', '2019') as $appendix) {
+                    //darebee use multiple different appendices here, which are not possible to be determined before...
+                    $original = 'https://darebee.com/images/programs/' . $url_name . '/' . $appendix . '/day' . $urlDayAppendix . '.jpg';
+                    echo ('original day-image: ' . $original . '<br/>');
+                    if(isImage($original)) {
+                        echo 'found appendix: ' . $appendix . '<br/>';
+                        //copyImage($original, $day_img);
+                        break;
+                    }
+                }
+            }
+        }
+        echo ('- - - -END- - - -<br/>');
+    }
+}
 function archiveWorkoutData($name, $focus, $type, $difficulty) {
     $media_dir = '../../media';
     {   //save actual workout images

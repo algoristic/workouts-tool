@@ -2,22 +2,25 @@
     <!-- MAIN MENU -->
     <ul class="card-header nav nav-tabs" role="tablist">
         <li class="nav-item">
-            <a class="nav-link active" href="#workouts" data-toggle="tab">Workouts</a>
+            <a class="nav-link <?php echo getActiveMarker('workouts'); ?>" href="#workouts" data-toggle="tab">Workouts</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#system" data-toggle="tab">System</a>
+            <a class="nav-link  <?php echo getActiveMarker('system'); ?>" href="#system" data-toggle="tab">System</a>
         </li>
     </ul>
     <!-- END MAIN MENU -->
 
     <!-- APP CONTENTS -->
     <div class="card-body tab-content">
-        <div id="workouts" class="tab-pane active">
-            <?php include "workouts.php"; ?>
+        <div id="workouts" class="tab-pane <?php echo getActiveMarker('workouts'); ?>">
+            <?php if(isActivePage('workouts')): ?>
+                <?php include "workouts.php"; ?>
+            <?php endif ?>
         </div>
-        <div id="system" class="tab-pane">
-            <h2>System</h2>
-            <button id="refreshDataBase" type="button" class="btn btn-primary">Fetch New Data From darebee.com</button>
+        <div id="system" class="tab-pane <?php echo getActiveMarker('system'); ?>">
+            <?php if(isActivePage('system')): ?>
+                <?php include "system.php"; ?>
+            <?php endif ?>
         </div>
     </div>
     <!-- END APP CONTENTS -->

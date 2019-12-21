@@ -94,6 +94,13 @@ function gatherWorkoutInfos(workout) {
 }
 
 $(function() {
+    $('.nav-tabs a').click(function() {
+        //$(this).tab('show');
+        let href = $(this).attr('href');
+        let target = href.substring(1, href.length);
+        requestParams.set('page', target);
+    });
+
     $('#refreshDataBase').click(function() {
         load();
         $.ajax({
