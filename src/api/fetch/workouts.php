@@ -14,6 +14,7 @@ if(!$debug) {
 $workouts = callDarebeeApi('https://darebee.com/media/com_jamegafilter/en_gb/1.json');
 $before = getWorkoutsAmount();
 $counter = 0;
+//TODO: more logging when debugging :)
 foreach($workouts as $key => $workout) {
     if(!$debug || ($debug && ($counter < $count))) {
         $name = trimSlug($workout->slug);
