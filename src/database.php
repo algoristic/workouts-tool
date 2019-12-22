@@ -49,8 +49,18 @@ function workoutIsInDatabase($name) {
     return ($result->num_rows > 0);
 }
 
+function programIsInDatabase($name) {
+    $result = query('SELECT id FROM programs WHERE name = "' . $name . '"');
+    return ($result->num_rows > 0);
+}
+
 function createWorkout($name, $ui_name, $description, $focus_id, $type_id, $difficulty_id) {
     $insert_query = 'INSERT INTO workouts (name, ui_name, description, focus_id, type_id, difficulty_id) VALUES ("' . $name . '", "' . $ui_name . '", "' . $description . '", "' . $focus_id . '", "' . $type_id . '", "' . $difficulty_id . '")';
+    query($insert_query);
+}
+
+function createProgram($name, $ui_name, $description, $days) {
+    $insert_query = 'INSERT INTO programs (name, ui_name, description, days) VALUES ("' . $name . '", "' . $ui_name . '", "' . $description . '", ' . $days . ')';
     query($insert_query);
 }
 

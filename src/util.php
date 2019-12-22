@@ -49,11 +49,15 @@ function getUrlName($url) {
     return explode('/', $url)[2];
 }
 
-function extractTextFromPage($url, $query) {
+function xPathQuery($url, $query) {
     $html = getHTML($url, 10);
     @$dom = DOMDocument::loadHTML($html);
     $xpath = new DOMXpath($dom);
-    $results = $xpath->query($query);
+    return $xpath->query($query);
+}
+
+function extractTextFromPage($url, $query) {
+    $results = xPathQuery($url, $query);
     $result = '';
     foreach($results as $key => $paragraph) {
         $result .= $paragraph->nodeValue . '<br/><br/>';

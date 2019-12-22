@@ -19,13 +19,19 @@ foreach ($programs as $key => $program) {
         $name = trimSlug($program->slug);
         $ui_name = getUiName($program->name);
         $url_name = getUrlName($program->thumbnail);
+        $url = 'https://darebee.com/programs/' . $name;
         $description = null;
-        {
-            $url = 'https://darebee.com/programs/' . $name;
+        {   //extract description
             $xPathQuery = '//div[contains(@class, "infop-text")]//p';
             $description = extractTextFromPage($url, $xPathQuery);
         }
-        archiveProgramData($name, $url_name, 30);
+        $days = 0;
+        {   //extract count of training days
+            $xPathQuery = '//div[contains(@class, "ppp")]';
+            $results = xPathQuery($url, $xPathQuery);
+            $days = sizeof($results);
+        }
+        archiveProgramData($name, $url_name, $days);
     }
     $counter = ($counter + 1);
 }
