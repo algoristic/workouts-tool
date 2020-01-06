@@ -38,7 +38,8 @@
 .preview-btn:disabled {
     opacity: .1;
 }
-.workout-name:hover {
+.workout-name:hover,
+.program-name:hover {
     cursor: pointer;
 }
 @media screen and (max-width: 767px) {

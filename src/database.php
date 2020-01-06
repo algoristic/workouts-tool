@@ -52,6 +52,18 @@ function getAllWorkouts() {
     ');
 }
 
+function getAllPrograms() {
+    return query('
+        SELECT
+            p.name AS id,
+            p.ui_name AS name,
+            p.description AS description,
+            p.days AS days
+        FROM
+            programs p
+    ');
+}
+
 function workoutIsInDatabase($name) {
     $result = query('SELECT id FROM workouts WHERE name = "' . $name . '"');
     return ($result->num_rows > 0);

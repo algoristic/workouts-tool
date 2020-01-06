@@ -1,4 +1,4 @@
-<?php include 'workouts-style.php' ?>
+<?php include 'overview-style.php' ?>
 <table id="workouts-table" class="table">
     <thead>
         <tr>
