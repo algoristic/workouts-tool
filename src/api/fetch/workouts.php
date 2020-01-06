@@ -19,6 +19,9 @@ foreach($workouts as $key => $workout) {
     if(!$debug || ($debug && ($counter < $count))) {
         $name = trimSlug($workout->slug);
         if(!workoutIsInDatabase($name)) {
+            if($debug) {
+                echo ('create workout: ' . $name . '<br/>');
+            }
             $ui_name = getUiName($workout->name);
             $description = null;
             {
@@ -66,15 +69,31 @@ foreach($workouts as $key => $workout) {
                     continue;
                 }
             }
+            $beforeCall = null;
+            $afterCall = null;
+            if($debug) {
+                $beforeCall = getWorkoutsAmount();
+            }
             createWorkout($name, $ui_name, $description, $focus_id, $type_id, $difficulty_id);
             archiveWorkoutData($name, $focus, $type, $difficulty);
+            if($debug) {
+                $afterCall = getWorkoutsAmount();
+                if(($afterCall - $beforeCall) != 1) {
+                    echo ('failed creating workout: ' . $name);
+                }
+            }
         }
     }
     $counter = ($counter + 1);
 }
 $after = getWorkoutsAmount();
 $diff = ($after - $before);
+if($debug) {
+    $response = array('Status' => 'OK');
+} else {
+    $response = array("total" => $after, "created" => $diff);
+
+}
 http_response_code(200);
-$response = array("total" => $after, "created" => $diff);
 echo json_encode($response);
 ?>

@@ -41,7 +41,7 @@ function archiveProgramData($name, $url_name, $days) {
                         if($foundCombination) {
                             break;
                         }
-                        foreach (array('web', 'pages', '2020') as $testAppendix) {
+                        foreach (array('web', 'pages', '2018', '2019', '2020') as $testAppendix) {
                             //darebee use multiple different appendices here, which are impossible to be determined before...
                             $original = 'https://darebee.com/images/programs/' . $url_name . '/' . $testAppendix . '/' . $testImageName . $urlDayAppendix . '.jpg';
                             if($debug) {
@@ -74,6 +74,8 @@ function archiveProgramData($name, $url_name, $days) {
     }
 }
 function archiveWorkoutData($name, $focus, $type, $difficulty) {
+    $debug = isset($_GET['debug']);
+    $space = '&nbsp;&nbsp;&nbsp;&nbsp;';
     $media_dir = '../../media';
     {   //save actual workout images
         $workout_dir = $media_dir . '/workouts/' . $name;

@@ -22,9 +22,17 @@ function query($sql) {
     }
 }
 
-function getWorkoutsAmount() {
-    $result = query('SELECT COUNT(*) AS C FROM workouts');
+function getCount($table) {
+    $result = query('SELECT COUNT(*) AS C FROM ' . $table);
     return $result->fetch_assoc()['C'];
+}
+
+function getWorkoutsAmount() {
+    return getCount('workouts');
+}
+
+function getProgramsAmount() {
+    return getCount('programs');
 }
 
 function getAllWorkouts() {
