@@ -17,21 +17,23 @@ foreach ($programs as $key => $program) {
     if(!$debug || ($debug && ($counter < $count))) {
         //don't forget: only load and parse if program is unknown (see workouts as reference)
         $name = trimSlug($program->slug);
-        $ui_name = getUiName($program->name);
-        $url_name = getUrlName($program->thumbnail);
-        $url = 'https://darebee.com/programs/' . $name;
-        $description = null;
-        {   //extract description
-            $xPathQuery = '//div[contains(@class, "infop-text")]//p';
-            $description = extractTextFromPage($url, $xPathQuery);
+        if(!programIsInDatabase($name)) {
+            $ui_name = getUiName($program->name);
+            $url_name = getUrlName($program->thumbnail);
+            $url = 'https://darebee.com/programs/' . $name;
+            $description = null;
+            {   //extract description
+                $xPathQuery = '//div[contains(@class, "infop-text")]//p';
+                $description = extractTextFromPage($url, $xPathQuery);
+            }
+            $days = 0;
+            {   //extract count of training days
+                $xPathQuery = '//div[contains(@class, "ppp")]';
+                $results = xPathQuery($url, $xPathQuery);
+                $days = sizeof($results);
+            }
+            archiveProgramData($name, $url_name, $days);
         }
-        $days = 0;
-        {   //extract count of training days
-            $xPathQuery = '//div[contains(@class, "ppp")]';
-            $results = xPathQuery($url, $xPathQuery);
-            $days = sizeof($results);
-        }
-        archiveProgramData($name, $url_name, $days);
     }
     $counter = ($counter + 1);
 }
