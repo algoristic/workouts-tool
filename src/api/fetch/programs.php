@@ -12,7 +12,7 @@ if(!$debug) {
     header("Content-Type: application/json; charset=UTF-8");
 }
 $programs = callDarebeeApi('https://darebee.com/media/com_jamegafilter/en_gb/3.json');
-$excludes = array('age-of-pandora');
+$excludes = array('age-of-pandora', 'totals-program');
 $before = getProgramsAmount();
 $counter = 0;
 foreach ($programs as $key => $program) {
