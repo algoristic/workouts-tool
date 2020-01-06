@@ -37,7 +37,7 @@ function archiveProgramData($name, $url_name, $days) {
                     $urlDayAppendix = '0' . $urlDayAppendix;
                 }
                 if(!$foundCombination) {
-                    foreach (array('day', 'chapter') as $testImageName) {
+                    foreach (array('day', 'chapter', 'card') as $testImageName) {
                         if($foundCombination) {
                             break;
                         }
