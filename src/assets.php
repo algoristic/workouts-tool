@@ -32,7 +32,9 @@ function authenticate() {
         }
         if(('marco' === $username) && ('Test1234' === $password)) {
             $_SESSION['user_id'] = 'admin';
-            $_GET['page'] = 'workouts';
+            if(!isset($_GET['page'])) {
+                $_GET['page'] = 'workouts';
+            }
             return True;
         } else {
             return False;
