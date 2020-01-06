@@ -23,12 +23,12 @@ function authenticate() {
         return True;
     } else {
         $username = null;
-        if(!empty($_GET['username'])) {
-            $username = $_GET['username'];
+        if(!empty($_REQUEST['username'])) {
+            $username = $_REQUEST['username'];
         }
         $password = null;
-        if(!empty($_GET['password'])) {
-            $password = $_GET['password'];
+        if(!empty($_REQUEST['password'])) {
+            $password = $_REQUEST['password'];
         }
         if(('marco' === $username) && ('Test1234' === $password)) {
             $_SESSION['user_id'] = 'admin';
