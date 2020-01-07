@@ -16,6 +16,10 @@ function isActivePage($page) {
 }
 
 function authenticate() {
+    $users = array(
+        'marco' => array('Test1234', 'admin'),
+        'pia' => array('TestLol', 'pia')
+    );
     if(isset($_SESSION['user_id'])) {
         if(empty($_GET['page'])) {
             $_GET['page'] = 'workouts';
@@ -30,15 +34,16 @@ function authenticate() {
         if(!empty($_REQUEST['password'])) {
             $password = $_REQUEST['password'];
         }
-        if(('marco' === $username) && ('Test1234' === $password)) {
-            $_SESSION['user_id'] = 'admin';
-            if(!isset($_GET['page'])) {
-                $_GET['page'] = 'workouts';
+        foreach($users as $user => $data) {
+            if(($username === $user) && ($data[0] === $password)) {
+                $_SESSION['user_id'] = $data[1];
+                if(!isset($_GET['page'])) {
+                    $_GET['page'] = 'workouts';
+                }
+                return True;
             }
-            return True;
-        } else {
-            return False;
         }
+        return False;
     }
 }
 ?>
