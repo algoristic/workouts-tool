@@ -1,5 +1,17 @@
 # workouts-tool
 
+## to-do
+
+- remove "Carbon and Dust" from database
+- manually add intro-images for:
+    - ironborn-program
+    - foundation-program
+    - foundation-light-program
+    - baseline-program
+    - avatar-program
+    - 30-days-of-hiit-advanced
+    - 30-days-of-hiit
+
 ## training routine options
 
 1. define days for routine
