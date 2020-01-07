@@ -1,5 +1,7 @@
 <?php
 $tabs = array(
+    'today' => 'Today',
+    'routine' => 'Routine',
     'workouts' => 'Workouts',
     'programs' => 'Programs',
     'system' => 'System'
@@ -7,7 +9,7 @@ $tabs = array(
 ?>
 <div class="card">
     <!-- MAIN MENU -->
-    <ul class="card-header nav nav-tabs" role="tablist">
+    <ul class="card-header nav nav-pills">
         <?php foreach ($tabs as $tab => $name): ?>
             <li class="nav-item">
                 <a class="nav-link <?php echo getActiveMarker($tab); ?>" href="#<?php echo $tab ?>"><?php echo $name ?></a>

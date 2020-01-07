@@ -16,7 +16,7 @@ function htmlDecode(input) {
 }
 
 $(function() {
-    $('.nav-tabs a').click(function() {
+    $('.nav-pills a').click(function() {
         let href = $(this).attr('href');
         let target = href.substring(1, href.length);
         requestParams.set('page', target);
