@@ -25,12 +25,7 @@ function gatherProgramInfos(program) {
 }
 
 function openInfoModal(program) {
-    $('#intro-img').addClass('loading');
-    let introLink = getIntroLink(program);
-    $('#intro-img').attr('src', introLink);
-    $('#intro-img').removeClass('loading');
     let info = gatherProgramInfos(program);
-    $('#intro-img').attr('alt', info.name);
     $('#program-description').html(htmlDecode(info.description));
     buildOverviewNav(program, 1);
     $('#info-modal').modal();

@@ -18,10 +18,6 @@
     margin: 0 auto;
     border-radius: 5px;
 }
-#days-overview {
-    margin-top: 1rem;
-}
-#intro-img,
 #days-overview img {
     max-height: 480px;
 }
@@ -53,7 +49,6 @@
     opacity: .5;
 }
 @media screen and (max-width: 767px) {
-    #days-overview,
     #program-description {
         margin-top: 1rem;
     }
