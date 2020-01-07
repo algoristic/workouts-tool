@@ -10,7 +10,7 @@
         <?php $programs = getAllPrograms(); ?>
         <?php if($programs->num_rows > 0): ?>
             <?php foreach ($programs as $key => $program): ?>
-                <tr id="<?php echo $program['id'] ?>" program-description="<?php echo htmlspecialchars($program['description']) ?>">
+                <tr id="<?php echo $program['id'] ?>" class="hover-preview" program-description="<?php echo htmlspecialchars($program['description']) ?>">
                     <td class="program-name" details-target="<?php echo $program['id'] ?>"><strong><?php echo $program['name'] ?></strong></td>
                     <td class="days-col"><?php echo $program['days'] ?></td>
                 </tr>
@@ -18,6 +18,9 @@
         <?php endif ?>
     </tbody>
 </table>
+<div id="preview-frame-desktop" class="d-none">
+    <img src="" alt="Preview">
+</div>
 <div id="info-modal" class="mobile-fullscreen workout-modal modal">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">

@@ -62,6 +62,17 @@ $(function() {
         day = parseInt(day);
         buildOverviewNav(program, day);
     });
+    if(!isMobile()) {
+        $('.hover-preview').mouseenter(function() {
+            let src = getIntroLink($(this).attr('id'));
+            $('#preview-frame-desktop img').attr('src', src);
+            $('#preview-frame-desktop').removeClass('d-none');
+        });
+        $('.hover-preview').mouseleave(function() {
+            $('#preview-frame-desktop img').attr('src', '');
+            $('#preview-frame-desktop').addClass('d-none');
+        });
+    }
     $('#programs-table .program-name').click(function() {
         let program = $(this).attr('details-target');
         openInfoModal(program);
