@@ -29,9 +29,14 @@
                     <div class="col-md-6">
                         <img id="intro-img" class="img-fluid" src="" alt="">
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-6 d-flex align-items-center">
                         <div id="program-description"></div>
                     </div>
+                </div>
+                <div id="days-overview" class="d-flex justify-content-center">
+                    <button id="go-back" type="button" class="btn btn-light preview-btn" preview-target="">&#xab;</button>
+                    <img src="" alt="" preview-program="">
+                    <button id="go-forward" type="button" class="btn btn-light preview-btn" preview-target="">&#xbb;</button>
                 </div>
             </div>
         </div>

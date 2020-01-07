@@ -18,6 +18,13 @@
     margin: 0 auto;
     border-radius: 5px;
 }
+#days-overview {
+    margin-top: 1rem;
+}
+#intro-img,
+#days-overview img {
+    max-height: 480px;
+}
 .workout-modal .modal-header {
     border-bottom: none;
     padding-bottom: 0;
@@ -42,7 +49,22 @@
 .program-name:hover {
     cursor: pointer;
 }
+.loading {
+    animation-name: load;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-timing-function: ease-in-out;
+}
+@keyframes load {
+    from {
+        opacity: 1;
+    } to {
+        opacity: .5;
+    }
+}
 @media screen and (max-width: 767px) {
+    #days-overview,
     #program-description {
         margin-top: 1rem;
     }

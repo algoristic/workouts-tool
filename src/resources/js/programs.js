@@ -6,26 +6,67 @@ function getIntroLink(program) {
     return (getProgramMediaLink(program) + '/intro.jpg');
 }
 
+function getDayOverview(program, day) {
+    return (getProgramMediaLink(program) + '/day-' + day + '.jpg');
+}
+
 function gatherProgramInfos(program) {
     let info = {};
     let row = $('#' + program);
+    info.id = program;
     info.description = row.attr('program-description');
     info.name = row.find('.program-name strong').text();
-    //info.days = row.find('.days-col').text();
+    let days = row.find('.days-col').text();
+    info.days = parseInt(days);
+    info.src = (day) => {
+        return getDayOverview(program, day);
+    };
     return info;
 }
 
 function openInfoModal(program) {
-    $('#intro-img').attr('src', '');
+    $('#intro-img').addClass('loading');
     let introLink = getIntroLink(program);
     $('#intro-img').attr('src', introLink);
+    $('#intro-img').removeClass('loading');
     let info = gatherProgramInfos(program);
     $('#intro-img').attr('alt', info.name);
     $('#program-description').html(htmlDecode(info.description));
+    buildOverviewNav(program, 1);
     $('#info-modal').modal();
 }
 
+function buildOverviewNav(program, day) {
+    $('#days-overview img').addClass('loading');
+    let info = gatherProgramInfos(program);
+    if(day == 1) {
+        $('#go-back').prop('disabled', true);
+        $('#go-back').attr('preview-target', '');
+    } else {
+        $('#go-back').prop('disabled', false);
+        $('#go-back').attr('preview-target', (day - 1));
+    }
+    let src = getDayOverview(info.id, day);
+    $('#days-overview img').attr('preview-program', info.id);
+    $('#days-overview img').attr('src', src);
+    $('#days-overview img').attr('alt', ('Preview: Day ' + day));
+    $('#days-overview img').removeClass('loading');
+    if(day == info.days) {
+        $('#go-forward').prop('disabled', true);
+        $('#go-forward').attr('preview-target', '');
+    } else {
+        $('#go-forward').prop('disabled', false);
+        $('#go-forward').attr('preview-target', (day + 1));
+    }
+}
+
 $(function() {
+    $('#go-back, #go-forward').click(function() {
+        let program = $('#days-overview img').attr('preview-program');
+        let day = $(this).attr('preview-target');
+        day = parseInt(day);
+        buildOverviewNav(program, day);
+    });
     $('#programs-table .program-name').click(function() {
         let program = $(this).attr('details-target');
         openInfoModal(program);
