@@ -16,7 +16,7 @@ $tabs = array(
             </li>
         <?php endforeach ?>
             <li class="ml-auto nav-item">
-                <a class="nav-link" href="./logout.php">Logout</a>
+                <a class="nav-link text-secondary" href="./logout.php">Logout</a>
             </li>
     </ul>
     <!-- END MAIN MENU -->
