@@ -15,7 +15,7 @@ $tabs = array(
                 <a class="nav-link <?php echo getActiveMarker($tab); ?>" href="#<?php echo $tab ?>"><?php echo $name ?></a>
             </li>
         <?php endforeach ?>
-            <li class="nav-item bg-warning">
+            <li class="ml-auto nav-item">
                 <a class="nav-link" href="./logout.php">Logout</a>
             </li>
     </ul>
@@ -30,6 +30,6 @@ $tabs = array(
                 <?php endif ?>
             </div>
         <?php endforeach ?>
+        <!-- END APP CONTENTS -->
     </div>
-    <!-- END APP CONTENTS -->
 </div>
