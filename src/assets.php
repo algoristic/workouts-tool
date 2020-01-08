@@ -40,10 +40,18 @@ function authenticate() {
                 if(!isset($_GET['page'])) {
                     $_GET['page'] = 'workouts';
                 }
+                storeUser($user);
                 return True;
             }
         }
         return False;
     }
+}
+
+function storeUser($username) {
+    $html = '<script type="text/javascript">';
+    $html .= 'sessionStorage["username"] = "' . $username . '";';
+    $html .= '</script>';
+    echo $html;
 }
 ?>
