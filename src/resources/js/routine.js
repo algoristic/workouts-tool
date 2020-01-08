@@ -1,5 +1,5 @@
 $(function() {
-    var table = $('#routines-table').DataTable({
+    var table = $('#training-days-table').DataTable({
         ordering: false,
         lengthChange: false,
         searching: false,

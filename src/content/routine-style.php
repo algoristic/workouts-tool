@@ -1,4 +1,4 @@
-<style media="screen">
+<style id="routine-style" media="screen">
 .add-btn {
     padding: .5rem;
     line-height: 1rem;

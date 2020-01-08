@@ -1,6 +1,6 @@
 <?php include 'table-style.php' ?>
 <?php include 'routine-style.php' ?>
-<table id="routines-table" class="table">
+<table id="training-days-table" class="table">
     <thead>
         <tr>
             <th>Day</th>
