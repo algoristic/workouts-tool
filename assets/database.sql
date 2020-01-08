@@ -92,6 +92,8 @@ CREATE TABLE routines(
     user VARCHAR(255) NOT NULL,
     name VARCHAR(255),
     day INT(6) UNSIGNED,
+    done BOOLEAN,
+    skipped BOOLEAN,
     pre_training_id INT(6) UNSIGNED,
     main_training_id INT(6) UNSIGNED,
     post_training_id INT(6) UNSIGNED,
