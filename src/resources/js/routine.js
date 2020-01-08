@@ -6,7 +6,7 @@ $(function() {
         paging: false,
         info: false,
         language: {
-            emptyTable: 'No training routines yet'
+            emptyTable: 'No training days yet'
         }
     });
 });
