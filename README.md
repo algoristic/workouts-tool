@@ -2,7 +2,6 @@
 
 ## to-do
 
-- remove "Carbon and Dust" from database
 - manually add intro-images for:
     - ironborn-program
     - foundation-program
