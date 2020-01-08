@@ -31,6 +31,14 @@ body {
 .pagination {
     padding-right: 15px;
 }
+.modal-no-border .modal-header {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+.modal-no-border .modal-footer {
+    border-top: none;
+    padding-top: 0;
+}
 @media screen and (min-width: 768px) {
     .nav-pills .nav-link {
         border-bottom-left-radius: 0;

@@ -21,14 +21,6 @@
 #days-overview img {
     max-height: 480px;
 }
-.workout-modal .modal-header {
-    border-bottom: none;
-    padding-bottom: 0;
-}
-.workout-modal .modal-footer {
-    border-top: none;
-    padding-top: 0;
-}
 .workout-table {
     width: unset;
     margin: auto;

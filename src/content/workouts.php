@@ -23,7 +23,7 @@
         <?php endif ?>
     </tbody>
 </table>
-<div id="info-modal" class="mobile-fullscreen workout-modal modal">
+<div id="info-modal" class="mobile-fullscreen modal-no-border modal">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -74,7 +74,7 @@
 <div id="preview-frame-desktop" class="d-none">
     <img src="" alt="Preview">
 </div>
-<div id="preview-frame-mobile" class="workout-modal modal">
+<div id="preview-frame-mobile" class="modal-no-border modal">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
