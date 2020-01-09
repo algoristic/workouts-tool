@@ -22,6 +22,18 @@ foreach ($programs as $key => $program) {
         if(!programIsInDatabase($name) && !in_array($name, $excludes)) {
             $ui_name = getUiName($program->name);
             $url_name = getUrlName($program->thumbnail);
+            $attrs = $workout->attr;
+            $difficulty = $attrs->ct21;
+            $difficulty_id = null;
+            {
+                $value = $difficulty->value[0];
+                $difficulty = $value;
+                if($value != '') {
+                    $difficulty_id = fetchDifficulty($value, $ui_value);
+                } else {
+                    continue;
+                }
+            }
             $url = 'https://darebee.com/programs/' . $name;
             $description = null;
             {   //extract description
@@ -39,7 +51,7 @@ foreach ($programs as $key => $program) {
             if($debug) {
                 $beforeCall = getProgramsAmount();
             }
-            createProgram($name, $ui_name, $description, $days);
+            createProgram($name, $ui_name, $description, $days, $difficulty_id);
             archiveProgramData($name, $url_name, $days);
             if($debug) {
                 $afterCall = getProgramsAmount();

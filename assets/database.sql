@@ -32,7 +32,9 @@ CREATE TABLE programs(
     name VARCHAR(255) NOT NULL,
     ui_name VARCHAR(255) NOT NULL,
     description TEXT,
-    days INT(6)
+    days INT(6),
+    difficulty_id INT(6) UNSIGNED  NOT NULL,
+    FOREIGN KEY (difficulty_id) REFERENCES diffculties(id)
 );
 /* WORKOUT COLLECTIONS */
 CREATE TABLE collections(
