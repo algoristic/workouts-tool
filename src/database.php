@@ -15,6 +15,9 @@ function getConnection() {
 function query($sql) {
     $connection = getConnection();
     try {
+        if(isset($_GET['debug'])) {
+            echo ($sql . '<br/>');
+        }
         return $connection->query($sql);
     } finally {
         $connection->close();
@@ -81,6 +84,27 @@ function getAllTrainingDays() {
         ORDER BY
             r.day ASC
     ');
+}
+
+function createEmptyTraining($user) {
+    query('INSERT INTO routines (user) VALUES ("' . $user . '")');
+    $result = query('
+        SELECT
+            MAX(r.id) AS id
+        FROM
+            routines r
+        WHERE
+            r.user = "' . $user . '"
+    ');
+    if($result->num_rows > 0) {
+        return $result->fetch_assoc()['id'];
+    } else {
+        return Null;
+    }
+}
+
+function removeTraining($id) {
+    query('DELETE FROM routines WHERE id = ' . $id);
 }
 
 function workoutIsInDatabase($name) {
