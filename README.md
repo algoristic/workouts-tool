@@ -2,8 +2,6 @@
 
 ## to-do
 
-- replace nav-pills with actual navbar
-
 - manually add intro-images for:
     - ironborn-program
     - foundation-program
