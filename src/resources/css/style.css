@@ -2,6 +2,13 @@ body {
     font-size: .8rem;
     overflow-x: auto;
 }
+#app-wrapper .tab-content {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border: 1px solid rgba(0,0,0,.125);
+    border-bottom-left-radius: .25rem;
+    border-bottom-right-radius: .25rem;
+}
 #login-card {
     margin: 0 auto;
     max-width: 768px;
@@ -38,12 +45,6 @@ body {
 .modal-no-border .modal-footer {
     border-top: none;
     padding-top: 0;
-}
-@media screen and (min-width: 768px) {
-    .nav-pills .nav-link {
-        border-bottom-left-radius: 0;
-        border-bottom-right-radius: 0;
-    }
 }
 @media screen and (max-width: 767px) {
     .container {
