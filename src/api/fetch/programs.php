@@ -14,16 +14,21 @@ if(!$debug) {
 $programs = callDarebeeApi('https://darebee.com/media/com_jamegafilter/en_gb/3.json');
 $excludes = array('age-of-pandora', 'totals-program', 'carbon-and-dust');
 $before = getProgramsAmount();
+if($debug) {
+    echo ('programs in database before fetching: ' . $before . '<br/>');
+}
 $counter = 0;
 foreach ($programs as $key => $program) {
     if(!$debug || ($debug && ($counter < $count))) {
         //don't forget: only load and parse if program is unknown (see workouts as reference)
         $name = trimSlug($program->slug);
-        if(!programIsInDatabase($name) && !in_array($name, $excludes)) {
+        $programIsInDatabase = programIsInDatabase($name);
+        if(!$programIsInDatabase && !in_array($name, $excludes)) {
             $ui_name = getUiName($program->name);
             $url_name = getUrlName($program->thumbnail);
-            $attrs = $workout->attr;
+            $attrs = $program->attr;
             $difficulty = $attrs->ct21;
+            var_dump($difficulty);
             $difficulty_id = null;
             {
                 $value = $difficulty->value[0];
@@ -64,6 +69,9 @@ foreach ($programs as $key => $program) {
     $counter = ($counter + 1);
 }
 $after = getProgramsAmount();
+if($debug) {
+    echo ('programs in database after fetching: ' . $after . '<br/>');
+}
 $diff = ($after - $before);
 if($debug) {
     $response = array('Status' => 'OK');

@@ -4,6 +4,7 @@
     <thead>
         <tr>
             <th>Name</th>
+            <th>Difficulty</th>
             <th>Days</th>
         </tr>
     </thead>
@@ -13,6 +14,7 @@
             <?php foreach ($programs as $key => $program): ?>
                 <tr id="<?php echo $program['id'] ?>" class="hover-preview" program-description="<?php echo htmlspecialchars($program['description']) ?>">
                     <td class="program-name" details-target="<?php echo $program['id'] ?>"><strong><?php echo $program['name'] ?></strong></td>
+                    <td class="program-difficulty"><?php echo $program['difficulty'] ?></td>
                     <td class="days-col"><?php echo $program['days'] ?></td>
                 </tr>
             <?php endforeach ?>

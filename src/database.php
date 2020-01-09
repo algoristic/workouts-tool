@@ -13,7 +13,6 @@ function getConnection() {
 }
 
 function query($sql) {
-    //echo ('QUERY=["' . $sql . '"], ');
     $connection = getConnection();
     try {
         return $connection->query($sql);
@@ -58,9 +57,29 @@ function getAllPrograms() {
             p.name AS id,
             p.ui_name AS name,
             p.description AS description,
-            p.days AS days
+            p.days AS days,
+            d.ui_value AS difficulty
         FROM
             programs p
+            LEFT JOIN diffculties d ON p.difficulty_id = d.id
+    ');
+}
+
+function getAllTrainingDays() {
+    $user = $_SESSION['user_id'];
+    return query('
+        SELECT
+            r.id AS id,
+            r.name AS name,
+            r.day AS day,
+            r.done AS done,
+            r.skipped AS skipped
+        FROM
+            routines r
+        WHERE
+            r.user = "' . $user . '"
+        ORDER BY
+            r.day ASC
     ');
 }
 
@@ -79,8 +98,8 @@ function createWorkout($name, $ui_name, $description, $focus_id, $type_id, $diff
     query($insert_query);
 }
 
-function createProgram($name, $ui_name, $description, $days) {
-    $insert_query = 'INSERT INTO programs (name, ui_name, description, days) VALUES ("' . $name . '", "' . $ui_name . '", "' . $description . '", ' . $days . ')';
+function createProgram($name, $ui_name, $description, $days, $difficulty_id) {
+    $insert_query = 'INSERT INTO programs (name, ui_name, description, days, difficulty_id) VALUES ("' . $name . '", "' . $ui_name . '", "' . $description . '", ' . $days . ', ' . $difficulty_id . ')';
     query($insert_query);
 }
 
