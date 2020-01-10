@@ -1,11 +1,11 @@
 api = {
     createTraining: (userName, handler) => {
-        api.callEnpoint('createTraining', {
+        api.callEnpoint('training/create', {
             'user': userName
         }, handler)
     },
     deleteTraining: (id, handler) => {
-        api.callEnpoint('deleteTraining', {
+        api.callEnpoint('training/delete', {
             'id': id
         }, handler);
     },

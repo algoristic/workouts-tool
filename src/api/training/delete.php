@@ -1,7 +1,7 @@
 <?php
 $debug = isset($_GET['debug']);
 $id = $_GET['id'];
-include '../database.php';
+include '../../database.php';
 header("Access-Control-Allow-Origin: *");
 if(!$debug) {
     header("Content-Type: application/json; charset=UTF-8");
