@@ -11,12 +11,13 @@ $(function() {
     });
     $('#add-training-day').click(function() {
         wizard.newTraining();
-        wizard.modal();
+        wizard.modal('show');
     })
     $('#save-changes').click(function() {
 
     });
     $('#cancel-changes').click(function() {
-
+        wizard.cancel();
+        wizard.modal('hide');
     });
 });
