@@ -21,5 +21,10 @@ routines.daysOnly = () => {
     return days;
 }
 routines.lastDay = () => {
-    return Math.max(...routines.daysOnly());
+    let days = routines.daysOnly()
+    if(days.length > 0) {
+        return Math.max(...days);
+    } else {
+        return 0;
+    }
 }
