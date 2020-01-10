@@ -2,6 +2,8 @@
 
 ## to-do
 
+- cancel action also, when modal gets closed other ways
+
 - manually add intro-images for:
     - ironborn-program
     - foundation-program
