@@ -29,7 +29,7 @@ $tabs = array(
     <!-- END MAIN MENU -->
 
     <!-- APP CONTENTS -->
-    <div class="tab-content container">
+    <div class="tab-content main-app container">
         <?php foreach ($tabs as $tab => $name): ?>
             <div class="tab-pane <?php echo getActiveMarker($tab); ?>">
                 <?php if(isActivePage($tab)): ?>
