@@ -8,7 +8,7 @@ mode = {
 
 context = {
     none: {
-        id: '',
+        id: 'tab-none',
         name: ''
     },
     overview: {
@@ -46,6 +46,8 @@ wizard.context = {
     set: (newContext) => {
         wizard.attr('edit-context', newContext.id);
         $('#training-day-subtype').text(newContext.name);
+        wizard.find('.active').removeClass('active');
+        wizard.find(('#' + newContext.id)).addClass('active');
     }
 }
 wizard.trainingDay = {

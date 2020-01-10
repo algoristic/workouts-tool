@@ -33,7 +33,8 @@
             </div>
             <div class="modal-body">
                 <div class="tab-content">
-                    <div id="overview" class="tab-pane active">
+                    <div id="tab-none" class="tab-pane active"></div>
+                    <div id="overview" class="tab-pane">
                         <div class="form-group">
                             <label for="training-day-name">Name:</label>
                             <input id="training-day-name" type="text" class="form-control" placeholder="Enter name for your training day">
