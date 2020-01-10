@@ -115,10 +115,11 @@ $(function() {
         });
     }
 
-    $('#workouts-table').DataTable({
+    let table = $('#workouts-table').DataTable({
         ordering: false,
         lengthChange: false,
         stateSave: true,
+        searching: true,
         drawCallback: function() {
             visibleWorkouts = [];
             currentRows = 0;
@@ -128,4 +129,24 @@ $(function() {
             });
         }
     });
+
+    /* Not ready to go ... */
+    /*
+    table.columns([1, 2, 3]).every(function() {
+        let column = this;
+        let index = column[0][0];
+        let wrapper = $('<div class="form-group"></div>').appendTo($('#col-' + index));
+        let select = $('<select class="form-control"><option value=""></option></select>')
+            .appendTo($(column.header()))
+            .on('change', function () {
+                let val = $.fn.dataTable.util.escapeRegex(
+                    $(this).val()
+                );
+                column.search(val ? '^' + val + '$' : '', true, false).draw();
+            });
+        column.data().unique().sort().each(function(d, j) {
+            select.append('<option value="' + d + '">' + d + '</option>')
+        });
+    });
+    */
 });
