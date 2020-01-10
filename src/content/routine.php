@@ -33,7 +33,7 @@
             </div>
             <div class="modal-body">
                 <div class="tab-content">
-                    <div class="tab-pane active">
+                    <div id="overview" class="tab-pane active">
                         <div class="form-group">
                             <label for="training-day-name">Name:</label>
                             <input id="training-day-name" type="text" class="form-control" placeholder="Enter name for your training day">
@@ -69,5 +69,6 @@
     </div>
 </div>
 <script src="/resources/js/routine.js"></script>
+<script src="/resources/js/api.js"></script>
 <script src="/resources/js/routines.js"></script>
 <script src="/resources/js/wizard.js"></script>

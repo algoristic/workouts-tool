@@ -1,9 +1,6 @@
 routines = $('#training-days-table');
 routines.trainingDays = () => {
     let days = [];
-    document.querySelectorAll('#training-days-table .training-day').forEach(function(elem) {
-        console.log(elem);
-    })
     routines.find('.training-day').each(function() {
         let id = $(this).attr('training-day-id');
         let day = $(this).find('.training-day-day').text();

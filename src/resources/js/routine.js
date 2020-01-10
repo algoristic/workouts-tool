@@ -13,4 +13,10 @@ $(function() {
         wizard.newTraining();
         wizard.modal();
     })
+    $('#save-changes').click(function() {
+
+    });
+    $('#cancel-changes').click(function() {
+
+    });
 });
