@@ -1,7 +1,8 @@
 api = {
-    createTraining: (userName, handler) => {
+    createTraining: (userName, day, handler) => {
         api.callEnpoint('training/create', {
-            'user': userName
+            'user': userName,
+            'day': day
         }, handler)
     },
     deleteTraining: (id, handler) => {

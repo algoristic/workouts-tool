@@ -1,12 +1,13 @@
 <?php
 $debug = isset($_GET['debug']);
 $user = $_GET['user'];
+$day = $_GET['day'];
 include '../../database.php';
 header("Access-Control-Allow-Origin: *");
 if(!$debug) {
     header("Content-Type: application/json; charset=UTF-8");
 }
-$id = createEmptyTraining($user);
+$id = createEmptyTraining($user, $day);
 $response;
 if($id != Null) {
     $response = array('Status' => 'Success', 'id' => $id);

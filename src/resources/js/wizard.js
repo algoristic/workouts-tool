@@ -62,7 +62,7 @@ wizard.newTraining = () => {
     wizard.mode.set(mode.create);
     wizard.trainingDay.set((routines.lastDay() + 1));
     wizard.context.set(context.overview);
-    api.createTraining(user, function(response) {
+    api.createTraining(user, wizard.trainingDay.get(), function(response) {
         wizard.id.set(response.id);
     });
 }

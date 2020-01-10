@@ -86,8 +86,8 @@ function getAllTrainingDays() {
     ');
 }
 
-function createEmptyTraining($user) {
-    query('INSERT INTO routines (user) VALUES ("' . $user . '")');
+function createEmptyTraining($user, $day) {
+    query('INSERT INTO routines (user, day) VALUES ("' . $user . '", ' . $day . ')');
     $result = query('
         SELECT
             MAX(r.id) AS id
