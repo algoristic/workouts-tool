@@ -13,4 +13,7 @@
 .training-skipped-1 {
     background: #fff2cc !important;
 }
+.use-workout {
+    cursor: pointer;
+}
 </style>

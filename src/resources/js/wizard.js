@@ -9,15 +9,28 @@ mode = {
 context = {
     none: {
         id: 'tab-none',
-        name: ''
+        name: '',
+        mainPanel: true
     },
     overview: {
         id: 'overview',
-        name: 'Overview'
+        name: 'Overview',
+        mainPanel: true
     },
     warmup: {
-        id: 'warmup',
-        name: 'Warmup'
+        id: 'workout-type-selection',
+        name: 'Warmup',
+        mainPanel: false
+    },
+    mainWorkout: {
+        id: 'workout-type-selection',
+        name: 'Main Workout',
+        mainPanel: false
+    },
+    cooldown: {
+        id: 'workout-type-selection',
+        name: 'Cooldown',
+        mainPanel: false
     }
 }
 
@@ -41,13 +54,21 @@ wizard.mode = {
 }
 wizard.context = {
     get: () => {
-        return wizard.attr('edit-context');
+        return wizard.activeContext;
     },
     set: (newContext) => {
+        wizard.activeContext = newContext;
         wizard.attr('edit-context', newContext.id);
         $('#training-day-subtype').text(newContext.name);
         wizard.find('.active').removeClass('active');
         wizard.find(('#' + newContext.id)).addClass('active');
+        if(newContext.mainPanel) {
+            $('#main-control').removeClass('d-none');
+            $('#sub-control').addClass('d-none');
+        } else {
+            $('#main-control').addClass('d-none');
+            $('#sub-control').removeClass('d-none');
+        }
     }
 }
 wizard.trainingDay = {
@@ -56,6 +77,16 @@ wizard.trainingDay = {
     },
     set: (newTrainingDay) => {
         wizard.attr('training-day', newTrainingDay);
+    }
+}
+wizard.workoutType = {
+    get: () => {
+        return $('.workout-type.active').attr('id');
+    },
+    set: (workoutType) => {
+        wizard.find('.active').removeClass('active');
+        $('.workout-type.active').removeClass('active');
+        $('#' + workoutType).addClass('active');
     }
 }
 wizard.newTraining = () => {
@@ -71,6 +102,9 @@ wizard.clear = () => {
     wizard.mode.set(mode.none);
     wizard.trainingDay.set('');
     wizard.id.set('');
+}
+wizard.clearWorkout = (workoutType) => {
+
 }
 wizard.save = () => {
     wizard.clear();

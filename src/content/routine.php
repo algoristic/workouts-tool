@@ -24,7 +24,7 @@
         <span class="add-btn-text">+</span>
     </button>
 </div>
-<div id="training-day-wizard" edit-mode="" training-day-id="" edit-context="" training-day="" class="modal modal-no-border">
+<div id="training-day-wizard" edit-mode="" training-day-id="" edit-context="" training-day="" edit-context-mode="" class="mobile-fullscreen modal modal-no-border">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -60,11 +60,41 @@
                             </button>
                         </div>
                     </div>
+                    <div id="workout-type-selection" class="tab-pane">
+                        <div class="form-group">
+                            <select class="form-control" id="type-selector">
+                                <option value="single-workout">Single Workout</option>
+                                <option value="program-workout">Workout Program</option>
+                                <option value="filter-workout">Filter Selection</option>
+                            </select>
+                        </div>
+                        <button id="select-btn" type="button" class="btn btn-primary btn-block">Continue</button>
+                    </div>
+                    <div id="single-workout" class="workout-type tab-pane">
+                        Single Workout
+                        <?php include 'workouts.php' ?>
+                    </div>
+                    <div id="program-workout" class="workout-type tab-pane">
+                        Program
+                    </div>
+                    <div id="filter-workout" class="workout-type tab-pane">
+                        Filter Selection
+                    </div>
                 </div>
             </div>
-            <div class="modal-footer d-flex">
-                <button id="cancel-changes" type="button" class="btn btn-secondary">Cancel</button>
-                <button id="save-changes" type="button" class="btn btn-primary">Save</button>
+            <div class="modal-footer">
+                <div id="main-control">
+                    <div class="d-flex">
+                        <button id="cancel-changes" type="button" class="btn btn-secondary">Cancel</button>
+                        <button id="save-changes" type="button" class="btn btn-primary">Save</button>
+                    </div>
+                </div>
+                <div id="sub-control" class="d-none">
+                    <div class="d-flex">
+                        <button id="cancel-workout-changes" type="button" class="btn btn-secondary">Cancel</button>
+                        <button id="save-workout-changes" type="button" class="btn btn-primary">Save</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

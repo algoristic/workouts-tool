@@ -1,5 +1,6 @@
 <?php include 'table-style.php' ?>
 <?php include 'overview-style.php' ?>
+<?php $isRoutine = ($_GET['page'] == 'routine'); ?>
 <table id="workouts-table" class="table">
     <thead>
         <tr>
@@ -7,6 +8,9 @@
             <th>Type</th>
             <th>Focus</th>
             <th>Difficulty</th>
+            <?php if($isRoutine): ?>
+                <th>Action</th>
+            <?php endif ?>
         </tr>
     </thead>
     <tbody>
@@ -18,6 +22,9 @@
                     <td class="type-col"><?php echo $workout['type'] ?></td>
                     <td class="focus-col"><?php echo $workout['focus'] ?></td>
                     <td class="difficulty-col"><?php echo $workout['difficulty'] ?></td>
+                    <?php if($isRoutine): ?>
+                        <td><a class="use-workout d-block" workout-id="<?php echo $workout['id'] ?>">&#x2bc8;</a></td>
+                    <?php endif ?>
                 </tr>
             <?php endforeach ?>
         <?php endif ?>
