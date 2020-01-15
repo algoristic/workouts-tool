@@ -76,6 +76,7 @@
                     </div>
                     <div id="program-workout" class="workout-type tab-pane">
                         Program
+                        <?php include 'programs.php' ?>
                     </div>
                     <div id="filter-workout" class="workout-type tab-pane">
                         Filter Selection

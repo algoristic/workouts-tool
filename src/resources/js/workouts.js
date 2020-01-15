@@ -115,21 +115,6 @@ $(function() {
         });
     }
 
-    let table = $('#workouts-table').DataTable({
-        ordering: false,
-        lengthChange: false,
-        stateSave: true,
-        searching: true,
-        drawCallback: function() {
-            visibleWorkouts = [];
-            currentRows = 0;
-            $('#workouts-table tbody tr').each(function(row) {
-                currentRows++;
-                visibleWorkouts.push($(this).attr('id'));
-            });
-        }
-    });
-
     /* Not ready to go ... */
     /*
     table.columns([1, 2, 3]).every(function() {

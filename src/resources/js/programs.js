@@ -77,9 +77,4 @@ $(function() {
         let program = $(this).attr('details-target');
         openInfoModal(program);
     });
-    $('#programs-table').DataTable({
-        ordering: false,
-        lengthChange: false,
-        stateSave: true
-    });
 });
