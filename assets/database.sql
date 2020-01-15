@@ -64,7 +64,7 @@ CREATE TABLE single_workouts(
 CREATE TABLE program_workouts(
     id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     program_id INT(6) UNSIGNED NOT NULL,
-    current_step INT(6) UNSIGNED DEFAULT 0,
+    current_step INT(6) UNSIGNED DEFAULT 1,
     training_id INT(6) UNSIGNED NOT NULL,
     FOREIGN KEY (program_id) REFERENCES programs(id),
     FOREIGN KEY (training_id) REFERENCES trainings(id)
