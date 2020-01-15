@@ -17,7 +17,7 @@ $tabs = array(
             <ul class="navbar-nav">
                 <?php foreach ($tabs as $tab => $name): ?>
                     <li class="nav-item">
-                        <a class="nav-link <?php echo getActiveMarker($tab); ?>" href="#<?php echo $tab ?>"><?php echo $name ?></a>
+                        <a class="nav-link <?php echo getActiveMarker($tab); ?>" href="/?page=<?php echo $tab ?>"><?php echo $name ?></a>
                     </li>
                 <?php endforeach ?>
                     <li class="ml-auto nav-item">

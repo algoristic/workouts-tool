@@ -14,11 +14,3 @@ function htmlDecode(input) {
   var doc = new DOMParser().parseFromString(input, "text/html");
   return doc.documentElement.textContent;
 }
-
-$(function() {
-    $('.navbar a.nav-link').click(function() {
-        let href = $(this).attr('href');
-        let target = href.substring(1, href.length);
-        requestParams.set('page', target);
-    });
-});
