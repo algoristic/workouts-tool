@@ -44,4 +44,9 @@ $(function() {
         console.log(workoutId);
         wizard.context.set(context.overview);
     });
+    $('.use-program').click(function() {
+        let workoutId = $(this).attr('program-id');
+        console.log(workoutId);
+        wizard.context.set(context.overview);
+    });
 });

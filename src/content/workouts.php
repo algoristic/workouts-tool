@@ -24,7 +24,7 @@
                     <td class="focus-col"><?php echo $workout['focus'] ?></td>
                     <td class="difficulty-col"><?php echo $workout['difficulty'] ?></td>
                     <?php if($isRoutinePage): ?>
-                        <td><a class="use-workout d-block" workout-id="<?php echo $workout['id'] ?>">&#x2bc8;</a></td>
+                        <td><a class="use-workout btn btn-block" workout-id="<?php echo $workout['id'] ?>" title="Use this workout">&#x2bc8;</a></td>
                     <?php endif ?>
                 </tr>
             <?php endforeach ?>

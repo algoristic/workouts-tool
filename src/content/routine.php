@@ -93,7 +93,9 @@
                 <div id="sub-control" class="d-none">
                     <div class="d-flex">
                         <button id="cancel-workout-changes" type="button" class="btn btn-secondary">Cancel</button>
+                        <!--
                         <button id="save-workout-changes" type="button" class="btn btn-primary">Save</button>
+                        -->
                     </div>
                 </div>
             </div>
