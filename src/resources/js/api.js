@@ -10,6 +10,20 @@ api = {
             'id': id
         }, handler);
     },
+    createSingleWorkout: (trainingId, workoutName, trainingPosition, handler) => {
+        api.callEnpoint('workout/create', {
+            'trainingId': trainingId,
+            'workoutName': workoutName,
+            'trainingPosition': trainingPosition
+        }, handler);
+    },
+    createProgramWorkout: (trainingId, programName, trainingPosition, handler) => {
+        api.callEnpoint('program/create', {
+            'trainingId': trainingId,
+            'programName': programName,
+            'trainingPosition': trainingPosition
+        }, handler)
+    },
     callEnpoint: (endpoint, params, handler) => {
         endpoint += '?';
         let firstElem = true;

@@ -11,7 +11,11 @@
         <?php $trainingDays = getAllTrainingDays(); ?>
         <?php if($trainingDays->num_rows > 0): ?>
             <?php foreach ($trainingDays as $key => $trainingDay): ?>
-                <tr training-day-id="<?php echo $trainingDay['id'] ?>" class="training-day training-done-<?php echo $trainingDay['done'] ?> training-skipped-<?php echo $trainingDay['skipped'] ?>">
+                <tr training-day-id="<?php echo $trainingDay['id'] ?>"
+                    pre-training-id="<?php echo $trainingDay['pre_training_id'] ?>" warmup-type="<?php echo $trainingDay['pre_training_category'] ?>"
+                    main-training-id="<?php echo $trainingDay['main_training_id'] ?>" main-training-type="<?php echo $trainingDay['main_training_category'] ?>"
+                    post-training-id="<?php echo $trainingDay['post_training_id'] ?>" post-training-type="<?php echo $trainingDay['post_training_category'] ?>"
+                    class="training-day training-done-<?php echo $trainingDay['done'] ?> training-skipped-<?php echo $trainingDay['skipped'] ?>">
                     <td class="training-day-day"><?php echo $trainingDay['day'] ?></td>
                     <td class="training-day-name"><?php echo $trainingDay['name'] ?></td>
                 </tr>
@@ -41,21 +45,33 @@
                         </div>
                         <p>Warmup</p>
                         <div class="d-flex justify-content-center">
-                            <button id="add-warmup-btn" type="button" class="btn btn-light add-btn" title="Add warmup">
+                            <div id="warmup-overview" class="d-none">
+                                <button class="btn btn-light delete-btn" type="button">D</button>
+                                <span class="ml-3 description"></span>
+                            </div>
+                            <button id="add-warmup-btn" type="button" class="btn btn-light add-btn d-none" title="Add warmup">
                                 <span class="add-btn-text">+</span>
                             </button>
                         </div>
                         <hr>
                         <p>Workout</p>
                         <div class="d-flex justify-content-center">
-                            <button id="add-main-workout-btn" type="button" class="btn btn-light add-btn" title="Add your main workout">
+                            <div id="main-workout-overview" class="d-none">
+                                <button class="btn btn-light delete-btn" type="button">D</button>
+                                <span class="ml-3 description"></span>
+                            </div>
+                            <button id="add-main-workout-btn" type="button" class="btn btn-light add-btn d-none" title="Add your main workout">
                                 <span class="add-btn-text">+</span>
                             </button>
                         </div>
                         <hr>
                         <p>Cool down</p>
                         <div class="d-flex justify-content-center">
-                            <button id="add-post-workout-btn" type="button" class="btn btn-light add-btn" title="Add cool down">
+                            <div id="post-workout-overview" class="d-none">
+                                <button class="btn btn-light delete-btn" type="button">D</button>
+                                <span class="ml-3 description"></span>
+                            </div>
+                            <button id="add-post-workout-btn" type="button" class="btn btn-light add-btn d-none" title="Add cool down">
                                 <span class="add-btn-text">+</span>
                             </button>
                         </div>
@@ -71,15 +87,12 @@
                         <button id="select-btn" type="button" class="btn btn-primary btn-block">Continue</button>
                     </div>
                     <div id="single-workout" class="workout-type tab-pane">
-                        Single Workout
                         <?php include 'workouts.php' ?>
                     </div>
                     <div id="program-workout" class="workout-type tab-pane">
-                        Program
                         <?php include 'programs.php' ?>
                     </div>
                     <div id="filter-workout" class="workout-type tab-pane">
-                        Filter Selection
                     </div>
                 </div>
             </div>

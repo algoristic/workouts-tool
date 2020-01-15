@@ -12,9 +12,14 @@ $(function() {
     $('#add-training-day').click(function() {
         wizard.newTraining();
         wizard.modal('show');
-    })
+    });
+    $('.training-day').click(function() {
+        wizard.loadTraining($(this));
+        wizard.modal('show');
+    });
     $('#save-changes').click(function() {
-
+        wizard.save();
+        wizard.modal('hide');
     });
     $('#cancel-changes').click(function() {
         wizard.cancel();
@@ -40,13 +45,21 @@ $(function() {
         });
     });
     $('.use-workout').click(function() {
+        let trainingId = wizard.id.get();
         let workoutId = $(this).attr('workout-id');
-        console.log(workoutId);
+        let trainingPosition = wizard.context.get().dbContext;
+        api.createSingleWorkout(trainingId, workoutId, trainingPosition, function(response) {
+            alert(JSON.stringify(response));
+        });
         wizard.context.set(context.overview);
     });
     $('.use-program').click(function() {
-        let workoutId = $(this).attr('program-id');
-        console.log(workoutId);
+        let trainingId = wizard.id.get();
+        let programId = $(this).attr('program-id');
+        let trainingPosition = wizard.context.get().dbContext;
+        api.createProgramWorkout(trainingId, programId, trainingPosition, function(response) {
+            alert(JSON.stringify(response));
+        })
         wizard.context.set(context.overview);
     });
 });

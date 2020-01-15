@@ -15,10 +15,20 @@ function getConnection() {
 function query($sql) {
     $connection = getConnection();
     try {
-        if(isset($_GET['debug'])) {
-            echo ($sql . '<br/>');
-        }
         return $connection->query($sql);
+    } finally {
+        $connection->close();
+    }
+}
+
+function insert($sql) {
+    $connection = getConnection();
+    try {
+        if($connection->query($sql) === True) {
+            return $connection->insert_id;
+        } else {
+            return Null;
+        }
     } finally {
         $connection->close();
     }
@@ -76,9 +86,18 @@ function getAllTrainingDays() {
             r.name AS name,
             r.day AS day,
             r.done AS done,
-            r.skipped AS skipped
+            r.skipped AS skipped,
+            r.pre_training_id AS pre_training_id,
+            pre.category AS pre_training_category,
+            r.main_training_id AS main_training_id,
+            main.category AS main_training_category,
+            r.post_training_id AS post_training_id,
+            post.category AS post_training_category
         FROM
             routines r
+            LEFT JOIN trainings pre ON r.pre_training_id = pre.id
+            LEFT JOIN trainings main ON r.main_training_id = main.id
+            LEFT JOIN trainings post ON r.post_training_id = post.id
         WHERE
             r.user = "' . $user . '"
         ORDER BY
@@ -103,8 +122,53 @@ function createEmptyTraining($user, $day) {
     }
 }
 
+function createEmptySingleWorkout($workoutName) {
+    $newWorkoutId = insert('INSERT INTO trainings (category) VALUES ("single_workouts")');
+    $workoutPlanId = getWorkout($workoutName)->fetch_assoc()['id'];
+    query('INSERT INTO single_workouts (workout_id, training_id) VALUES (' . $workoutPlanId . ', ' . $newWorkoutId . ')');
+    return $newWorkoutId;
+}
+
+function createEmptySingleProgram($programName) {
+    $newProgramId = insert('INSERT INTO trainings (category) VALUES ("program_workouts")');
+    $programPlanId = getProgram($programName)->fetch_assoc()['id'];
+    query('INSERT INTO program_workouts (program_id, training_id) VALUES (' . $programPlanId . ', ' . $newProgramId . ')');
+    return $newProgramId;
+}
+
+function loadWorkout($id) {
+    return query('
+        SELECT
+            t.id AS id,
+            t.category AS category
+        FROM
+            trainings t
+        WHERE
+            t.id = ' . $id . '
+    ');
+}
+
+function updateRoutine($routineId, $trainingId, $trainingPosition) {
+    query('
+        UPDATE
+            routines r
+        SET
+            r.' . $trainingPosition. '_id = ' . $trainingId . '
+        WHERE
+            r.id = ' . $routineId . '
+    ');
+}
+
 function removeTraining($id) {
     query('DELETE FROM routines WHERE id = ' . $id);
+}
+
+function getWorkout($name) {
+    return query('SELECT * FROM workouts w WHERE w.name = "' . $name . '"');
+}
+
+function getProgram($name) {
+    return query('SELECT * FROM programs p WHERE p.name = "' . $name . '"');
 }
 
 function workoutIsInDatabase($name) {

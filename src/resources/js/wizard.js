@@ -3,7 +3,8 @@ user = sessionStorage["username"];
 mode = {
     none: '',
     create: 'create',
-    update: 'update'
+    update: 'update',
+    saved: 'saved'
 }
 
 context = {
@@ -20,16 +21,19 @@ context = {
     warmup: {
         id: 'workout-type-selection',
         name: 'Warmup',
+        dbContext: 'pre_training',
         mainPanel: false
     },
     mainWorkout: {
         id: 'workout-type-selection',
         name: 'Main Workout',
+        dbContext: 'main_training',
         mainPanel: false
     },
     cooldown: {
         id: 'workout-type-selection',
         name: 'Cooldown',
+        dbContext: 'post_training',
         mainPanel: false
     }
 }
@@ -97,6 +101,35 @@ wizard.newTraining = () => {
         wizard.id.set(response.id);
     });
 }
+wizard.loadTraining = (training) => {
+    wizard.mode.set(mode.update);
+    wizard.context.set(context.overview);
+    if(training.attr('pre-training-id')) {
+        wizard.overview('warmup', training, 'pre');
+    } else {
+        wizard.addButton('warmup');
+    }
+    if(training.attr('main-training-id')) {
+        wizard.overview('main-workout', training, 'main');
+    } else {
+        wizard.addButton('main-workout');
+    }
+    if(training.attr('post-training-id')) {
+        wizard.overview('post-workout', training, 'post');
+    } else {
+        wizard.addButton('post-workout');
+    }
+}
+wizard.overview = (position, training, apiWorkoutKey) => {
+    $('#add-' + position + '-btn').addClass('d-none');
+    $('#' + position + '-overview').removeClass('d-none');
+
+    //$('#' + position + '-overview .description');
+}
+wizard.addButton = (position) => {
+    $('#add-' + position + '-btn').removeClass('d-none');
+    $('#' + position + '-overview').addClass('d-none');
+}
 wizard.clear = () => {
     wizard.context.set(context.none);
     wizard.mode.set(mode.none);
@@ -107,6 +140,7 @@ wizard.clearWorkout = (workoutType) => {
 
 }
 wizard.save = () => {
+    wizard.mode.set(mode.saved);
     wizard.clear();
 }
 wizard.cancel = () => {
