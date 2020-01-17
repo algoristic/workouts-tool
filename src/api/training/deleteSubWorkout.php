@@ -9,6 +9,7 @@ if(!$debug) {
 }
 $response;
 try {
+    deleteSubWorkout($trainingId, $trainingPosition);
     $response = array('Status' => 'Success');
 } catch (exception $e) {
     $response = array('Status' => 'Error');

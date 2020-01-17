@@ -200,6 +200,17 @@ function createEmptySingleProgram($programName) {
     return $newProgramId;
 }
 
+function deleteSubWorkout($trainingId, $trainingPosition) {
+    query('
+        UPDATE
+            routines r
+        SET
+            r.'.$trainingPosition.'_training_id = NULL
+        WHERE
+            r.id = ' . $trainingId . '
+    ');
+}
+
 function loadWorkout($id) {
     return query('
         SELECT
