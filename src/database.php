@@ -105,6 +105,68 @@ function getAllTrainingDays() {
     ');
 }
 
+function getTrainingCategory($trainingId) {
+    return query('
+        SELECT
+            t.category AS category
+        FROM
+            trainings t
+        WHERE
+            t.id = ' . $trainingId . '
+    ')->fetch_assoc()['category'];
+}
+
+function getWorkoutDescription($trainingId) {
+    $workoutId = query('
+        SELECT
+            w.workout_id AS id
+        FROM
+            single_workouts w
+        WHERE
+            w.training_id = ' . $trainingId . '
+    ')->fetch_assoc()['id'];
+    $workout = query('
+        SELECT
+            w.name AS id,
+            w.ui_name AS name,
+            w.description AS description,
+            t.ui_value AS type,
+            f.ui_value AS focus,
+            d.ui_value AS difficulty
+        FROM
+            workouts w
+            LEFT JOIN types t ON w.type_id = t.id
+            LEFT JOIN focuses f ON w.focus_id = f.id
+            LEFT JOIN diffculties d ON w.difficulty_id = d.id
+        WHERE
+            w.id = ' . $workoutId . '
+    ')->fetch_assoc();
+    return 'Single Workout: ' . $workout['name'] . ' (' . $workout['type'] . ', ' . $workout['focus'] . ', ' . $workout['difficulty'] . ')';
+}
+
+function getProgramDescription($programId) {
+    $workoutId = query('
+        SELECT
+            p.program_id AS id
+        FROM
+            program_workouts p
+        WHERE
+            p.training_id = ' . $programId . '
+    ')->fetch_assoc()['id'];
+    $program = query('
+        SELECT
+            p.name AS id,
+            p.ui_name AS name,
+            p.description AS description,
+            p.days AS days,
+            d.ui_value AS difficulty
+        FROM
+            programs p
+            LEFT JOIN diffculties d ON p.difficulty_id = d.id
+    ')->fetch_assoc();
+    return 'Program Workout: ' . $program['name'] . ' (' . $program['days'] . ' days, ' . $program['difficulty'] . ')';
+}
+
 function createEmptyTraining($user, $day) {
     query('INSERT INTO routines (user, day) VALUES ("' . $user . '", ' . $day . ')');
     $result = query('

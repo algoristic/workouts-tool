@@ -22,7 +22,12 @@ api = {
             'trainingId': trainingId,
             'programName': programName,
             'trainingPosition': trainingPosition
-        }, handler)
+        }, handler);
+    },
+    getDescription: (subWorkoutId, handler) => {
+        api.callEnpoint('description/get', {
+            'subWorkoutId': subWorkoutId
+        }, handler);
     },
     callEnpoint: (endpoint, params, handler) => {
         endpoint += '?';

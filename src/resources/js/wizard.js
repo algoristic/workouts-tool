@@ -103,6 +103,7 @@ wizard.newTraining = () => {
 }
 wizard.loadTraining = (training) => {
     wizard.mode.set(mode.update);
+    wizard.id.set(training.attr('training-day-id'));
     wizard.context.set(context.overview);
     if(training.attr('pre-training-id')) {
         wizard.overview('warmup', training, 'pre');
@@ -120,11 +121,13 @@ wizard.loadTraining = (training) => {
         wizard.addButton('post-workout');
     }
 }
-wizard.overview = (position, training, apiWorkoutKey) => {
-    $('#add-' + position + '-btn').addClass('d-none');
-    $('#' + position + '-overview').removeClass('d-none');
-
-    //$('#' + position + '-overview .description');
+wizard.overview = (position, training, subWorkoutPrefix) => {
+    let subWorkoutId = training.attr(subWorkoutPrefix + '-training-id');
+    api.getDescription(subWorkoutId, function(response) {
+        $('#' + position + '-overview .description').text(response.description);
+        $('#add-' + position + '-btn').addClass('d-none');
+        $('#' + position + '-overview').removeClass('d-none');
+    });
 }
 wizard.addButton = (position) => {
     $('#add-' + position + '-btn').removeClass('d-none');
