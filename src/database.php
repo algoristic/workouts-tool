@@ -208,7 +208,7 @@ function deleteSubWorkout($trainingId, $trainingPosition) {
             r.'.$trainingPosition.'_training_id = NULL
         WHERE
             r.id = ' . $trainingId . '
-    ');
+            ');
 }
 
 function loadWorkout($id) {
