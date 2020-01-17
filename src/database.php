@@ -225,6 +225,17 @@ function removeTraining($id) {
     query('DELETE FROM routines WHERE id = ' . $id);
 }
 
+function updateTraining($id, $name) {
+    query('
+        UPDATE
+            routines r
+        SET
+            r.name = "' . $name . '"
+        WHERE
+            r.id = ' . $id . '
+    ');
+}
+
 function getWorkout($name) {
     return query('SELECT * FROM workouts w WHERE w.name = "' . $name . '"');
 }

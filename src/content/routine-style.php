@@ -7,7 +7,7 @@
 .add-btn-text {
     font-weight: bold;
 }
-.add-btn-text {    
+.add-btn-text {
     font-size: 1.5rem;
 }
 .training-done-1 {

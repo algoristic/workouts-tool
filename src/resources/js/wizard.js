@@ -4,7 +4,8 @@ mode = {
     none: '',
     create: 'create',
     update: 'update',
-    saved: 'saved'
+    saved: 'saved',
+    deleted: 'deleted'
 }
 
 context = {
@@ -22,18 +23,21 @@ context = {
         id: 'workout-type-selection',
         name: 'Warmup',
         dbContext: 'pre_training',
+        routineContext: 'pre-training',
         mainPanel: false
     },
     mainWorkout: {
         id: 'workout-type-selection',
         name: 'Main Workout',
         dbContext: 'main_training',
+        routineContext: 'main-training',
         mainPanel: false
     },
     cooldown: {
         id: 'workout-type-selection',
         name: 'Cooldown',
         dbContext: 'post_training',
+        routineContext: 'post-training',
         mainPanel: false
     }
 }
@@ -83,6 +87,14 @@ wizard.trainingDay = {
         wizard.attr('training-day', newTrainingDay);
     }
 }
+wizard.trainingName = {
+    get: () => {
+        return $('#training-day-name').val();
+    },
+    set: (newTrainingName) => {
+        $('#training-day-name').val(newTrainingName);
+    }
+}
 wizard.workoutType = {
     get: () => {
         return $('.workout-type.active').attr('id');
@@ -97,14 +109,33 @@ wizard.newTraining = () => {
     wizard.mode.set(mode.create);
     wizard.trainingDay.set((routines.lastDay() + 1));
     wizard.context.set(context.overview);
-    api.createTraining(user, wizard.trainingDay.get(), function(response) {
+    $('#cancel-changes, #save-changes').removeClass('d-none');
+    $('#delete').addClass('d-none');
+    let trainingDay = wizard.trainingDay.get();
+    api.createTraining(user, trainingDay, function(response) {
         wizard.id.set(response.id);
+        let row = table.row.add([
+            trainingDay,
+            ''
+        ]).draw().node();
+        $(row).addClass('training-day training-done-0 training-skipped-0');
+        $(row).attr('training-day-id', response.id);
+        $(row).find('td:first-child').addClass('training-day-day');
+        $(row).find('td:last-child').addClass('training-day-name');
+        $(row).click(function() {
+            wizard.loadTraining($(this));
+            wizard.modal('show');
+        });
     });
 }
 wizard.loadTraining = (training) => {
     wizard.mode.set(mode.update);
     wizard.id.set(training.attr('training-day-id'));
+    wizard.trainingName.set(training.find('.training-day-name').text());
+    wizard.trainingDay.set(training.find('.training-day-day').text());
     wizard.context.set(context.overview);
+    $('#cancel-changes, #save-changes').addClass('d-none');
+    $('#delete').removeClass('d-none');
     if(training.attr('pre-training-id')) {
         wizard.overview('warmup', training, 'pre');
     } else {
@@ -137,20 +168,28 @@ wizard.clear = () => {
     wizard.context.set(context.none);
     wizard.mode.set(mode.none);
     wizard.trainingDay.set('');
+    wizard.trainingName.set('');
     wizard.id.set('');
-}
-wizard.clearWorkout = (workoutType) => {
-
 }
 wizard.save = () => {
     wizard.mode.set(mode.saved);
+    let id = wizard.id.get();
+    let name = wizard.trainingName.get();
+    let day = wizard.trainingDay.get();
     wizard.clear();
 }
 wizard.cancel = () => {
     if(wizard.mode.get() === mode.create) {
-        api.deleteTraining(wizard.id.get());
+        wizard.delete();
     }
     wizard.clear();
+}
+wizard.delete = () => {
+    let id = wizard.id.get();
+    api.deleteTraining(id, function(response) {
+        table.row($('tr[training-day-id="' + id + '"]')).remove().draw();
+        wizard.mode.set(mode.deleted);
+    });
 }
 wizard.on('hide.bs.modal', function() {
     wizard.cancel();

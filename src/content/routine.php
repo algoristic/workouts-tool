@@ -12,9 +12,9 @@
         <?php if($trainingDays->num_rows > 0): ?>
             <?php foreach ($trainingDays as $key => $trainingDay): ?>
                 <tr training-day-id="<?php echo $trainingDay['id'] ?>"
-                    pre-training-id="<?php echo $trainingDay['pre_training_id'] ?>" warmup-type="<?php echo $trainingDay['pre_training_category'] ?>"
-                    main-training-id="<?php echo $trainingDay['main_training_id'] ?>" main-training-type="<?php echo $trainingDay['main_training_category'] ?>"
-                    post-training-id="<?php echo $trainingDay['post_training_id'] ?>" post-training-type="<?php echo $trainingDay['post_training_category'] ?>"
+                    pre-training-id="<?php echo $trainingDay['pre_training_id'] ?>"
+                    main-training-id="<?php echo $trainingDay['main_training_id'] ?>"
+                    post-training-id="<?php echo $trainingDay['post_training_id'] ?>"
                     class="training-day training-done-<?php echo $trainingDay['done'] ?> training-skipped-<?php echo $trainingDay['skipped'] ?>">
                     <td class="training-day-day"><?php echo $trainingDay['day'] ?></td>
                     <td class="training-day-name"><?php echo $trainingDay['name'] ?></td>
@@ -46,7 +46,7 @@
                         <p>Warmup</p>
                         <div class="d-flex justify-content-center">
                             <div id="warmup-overview" class="d-none">
-                                <button class="btn btn-light delete-btn" type="button">D</button>
+                                <button class="btn btn-light delete-btn" type="button"><i class="fas fa-trash"></i></button>
                                 <span class="ml-3 description"></span>
                             </div>
                             <button id="add-warmup-btn" type="button" class="btn btn-light add-btn d-none" title="Add warmup">
@@ -57,7 +57,7 @@
                         <p>Workout</p>
                         <div class="d-flex justify-content-center">
                             <div id="main-workout-overview" class="d-none">
-                                <button class="btn btn-light delete-btn" type="button">D</button>
+                                <button class="btn btn-light delete-btn" type="button"><i class="fas fa-trash"></i></button>
                                 <span class="ml-3 description"></span>
                             </div>
                             <button id="add-main-workout-btn" type="button" class="btn btn-light add-btn d-none" title="Add your main workout">
@@ -68,7 +68,7 @@
                         <p>Cool down</p>
                         <div class="d-flex justify-content-center">
                             <div id="post-workout-overview" class="d-none">
-                                <button class="btn btn-light delete-btn" type="button">D</button>
+                                <button class="btn btn-light delete-btn" type="button"><i class="fas fa-trash"></i></button>
                                 <span class="ml-3 description"></span>
                             </div>
                             <button id="add-post-workout-btn" type="button" class="btn btn-light add-btn d-none" title="Add cool down">
@@ -100,7 +100,8 @@
                 <div id="main-control">
                     <div class="d-flex">
                         <button id="cancel-changes" type="button" class="btn btn-secondary">Cancel</button>
-                        <button id="save-changes" type="button" class="btn btn-primary">Save</button>
+                        <button id="save-changes" type="button" class="btn btn-primary ml-2">Save</button>
+                        <button id="delete" type="button" class="btn btn-primary ml-2">Delete</button>
                     </div>
                 </div>
                 <div id="sub-control" class="d-none">

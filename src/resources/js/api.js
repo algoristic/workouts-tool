@@ -10,6 +10,12 @@ api = {
             'id': id
         }, handler);
     },
+    updateTraining: (id, name, handler) => {
+        api.callEnpoint('training/update', {
+            'id': id,
+            'name': name
+        }, handler);
+    },
     createSingleWorkout: (trainingId, workoutName, trainingPosition, handler) => {
         api.callEnpoint('workout/create', {
             'trainingId': trainingId,
