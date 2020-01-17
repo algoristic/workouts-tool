@@ -87,7 +87,7 @@
                             <select class="form-control" id="type-selector">
                                 <option value="single-workout">Single Workout</option>
                                 <option value="program-workout">Workout Program</option>
-                                <option value="filter-workout">Filter Selection</option>
+                                <!-- <option value="filter-workout">Filter Selection</option> -->
                             </select>
                         </div>
                         <button id="select-btn" type="button" class="btn btn-primary btn-block">Continue</button>
@@ -107,7 +107,7 @@
                     <div class="d-flex">
                         <button id="cancel-changes" type="button" class="btn btn-secondary">Cancel</button>
                         <button id="save-changes" type="button" class="btn btn-primary ml-2">Save</button>
-                        <button id="delete" type="button" class="btn btn-primary ml-2">Delete</button>
+                        <button id="delete" type="button" class="btn btn-danger ml-2">Delete</button>
                     </div>
                 </div>
                 <div id="sub-control" class="d-none">
