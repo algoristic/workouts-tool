@@ -52,7 +52,7 @@ CREATE TABLE workouts_in_collection(
 /* TRAINING ROUTINES */
 CREATE TABLE trainings(
     id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    category VARCHAR(255) NOT NULL /* none, single_workouts, program_workouts, filter_workouts (, collection_workouts) */
+    category VARCHAR(255) NOT NULL
 );
 CREATE TABLE single_workouts(
     id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -87,8 +87,6 @@ CREATE TABLE collection_workouts(
     FOREIGN KEY (collection_id) REFERENCES collection(id),
     FOREIGN KEY (training_id) REFERENCES trainings(id)
 );
-/* MEMO: Rest days will be stored by saving an empty entry :) */
-/* MEMO: workouts (pre-, main- and post-) can consist of: none, single, program, filter (and collection) */
 CREATE TABLE routines(
     id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     user VARCHAR(255) NOT NULL,
