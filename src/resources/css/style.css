@@ -1,8 +1,10 @@
 body {
     font-size: .8rem;
     overflow-x: auto;
+    background: #f5f5f5;
 }
 #app-wrapper .tab-content.main-app {
+    background: #fff;
     padding-top: 1rem;
     padding-bottom: 1rem;
     border: 1px solid rgba(0,0,0,.125);
