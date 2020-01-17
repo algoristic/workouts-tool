@@ -16,6 +16,12 @@ api = {
             'name': name
         }, handler);
     },
+    deleteSubWorkout: (trainingId, trainingPosition, handler) => {
+        api.callEnpoint('training/deleteSubWorkout', {
+            'trainingId': trainingId,
+            'trainingPosition': trainingPosition
+        }, handler);
+    },
     createSingleWorkout: (trainingId, workoutName, trainingPosition, handler) => {
         api.callEnpoint('workout/create', {
             'trainingId': trainingId,

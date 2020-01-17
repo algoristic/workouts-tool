@@ -1,4 +1,7 @@
 user = sessionStorage["username"];
+if(user === undefined) {
+    window.location.replace('https://workout.marco-leweke.de/logout');
+}
 
 mode = {
     none: '',
@@ -111,6 +114,9 @@ wizard.newTraining = () => {
     wizard.context.set(context.overview);
     $('#cancel-changes, #save-changes').removeClass('d-none');
     $('#delete').addClass('d-none');
+    wizard.addButton('warmup');
+    wizard.addButton('main-workout');
+    wizard.addButton('post-workout');
     let trainingDay = wizard.trainingDay.get();
     api.createTraining(user, trainingDay, function(response) {
         wizard.id.set(response.id);
@@ -155,7 +161,7 @@ wizard.loadTraining = (training) => {
 wizard.overview = (position, training, subWorkoutPrefix) => {
     let subWorkoutId = training.attr(subWorkoutPrefix + '-training-id');
     api.getDescription(subWorkoutId, function(response) {
-        $('#' + position + '-overview .description').text(response.description);
+        $('#' + position + '-overview .description').text(htmlDecode(response.description));
         $('#add-' + position + '-btn').addClass('d-none');
         $('#' + position + '-overview').removeClass('d-none');
     });

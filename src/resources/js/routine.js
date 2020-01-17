@@ -2,6 +2,9 @@ function updateRoutine(trainingId, subWorkoutId) {
     let context = wizard.context.get();
     let training = $('tr[training-day-id="' + trainingId + '"]');
     training.attr(context.routineContext + '-id', subWorkoutId);
+    if(wizard.mode.get() === mode.create) {
+        wizard.save();
+    }
     wizard.loadTraining(training);
 }
 
@@ -48,6 +51,15 @@ $(function() {
     $('#add-post-workout-btn').click(function() {
         wizard.context.set(context.cooldown);
     });
+    $('.delete-btn').click(function() {
+        let trainingId = wizard.id.get();
+        let trainingPosition = $(this).attr('db-context');
+        let uiContext = $(this).attr('ui-context');
+        api.deleteSubWorkout(trainingId, trainingPosition, function(response) {
+            wizard.addButton(uiContext);
+            $('tr[training-day-id="' + trainingId + '"]').attr(trainingPosition + '-training-id', '');
+        });
+    });
     $('#select-btn').click(function() {
         let workoutType = $('#type-selector').find(':selected').val();
         wizard.workoutType.set(workoutType);
@@ -56,22 +68,6 @@ $(function() {
             wizard.clearWorkout(workoutType);
             wizard.context.set(context.overview);
         });
-    });
-    $('.use-workout').click(function() {
-        let trainingId = wizard.id.get();
-        let workoutId = $(this).attr('workout-id');
-        let trainingPosition = wizard.context.get().dbContext;
-        api.createSingleWorkout(trainingId, workoutId, trainingPosition, function(response) {
-            updateRoutine(trainingId, response.id);
-        });
-    });
-    $('.use-program').click(function() {
-        let trainingId = wizard.id.get();
-        let programId = $(this).attr('program-id');
-        let trainingPosition = wizard.context.get().dbContext;
-        api.createProgramWorkout(trainingId, programId, trainingPosition, function(response) {
-            updateRoutine(trainingId, response.id);
-        })
     });
     $('#training-day-name').blur(function() {
         let id = wizard.id.get();

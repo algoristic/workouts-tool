@@ -21,7 +21,7 @@ switch ($category) {
 
 $response;
 try {
-    $response = array('Status' => 'Success', 'description' => $description);
+    $response = array('Status' => 'Success', 'description' => addslashes($description));
 } catch (exception $e) {
     $response = array('Status' => 'Error');
 }

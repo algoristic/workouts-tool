@@ -29,7 +29,7 @@
     </button>
 </div>
 <div id="training-day-wizard" edit-mode="" training-day-id="" edit-context="" training-day="" edit-context-mode="" class="mobile-fullscreen modal modal-no-border">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h4>Training Day: <span id="training-day-subtype"></span></h4>
@@ -44,37 +44,43 @@
                             <input id="training-day-name" type="text" class="form-control" placeholder="Enter name for your training day">
                         </div>
                         <p>Warmup</p>
-                        <div class="d-flex justify-content-center">
-                            <div id="warmup-overview" class="d-none">
-                                <button class="btn btn-light delete-btn" type="button"><i class="fas fa-trash"></i></button>
-                                <span class="ml-3 description"></span>
+                        <div id="warmup-overview" class="d-none row">
+                            <div class="col-2">
+                                <button class="btn btn-light delete-btn" ui-context="warmup" db-context="pre" type="button"><i class="fas fa-trash"></i></button>
                             </div>
-                            <button id="add-warmup-btn" type="button" class="btn btn-light add-btn d-none" title="Add warmup">
-                                <span class="add-btn-text">+</span>
-                            </button>
+                            <div class="col-10">
+                                <span class="description"></span>
+                            </div>
                         </div>
+                        <button id="add-warmup-btn" type="button" class="btn btn-light add-btn d-none" title="Add warmup">
+                            <span class="add-btn-text">+</span>
+                        </button>
                         <hr>
                         <p>Workout</p>
-                        <div class="d-flex justify-content-center">
-                            <div id="main-workout-overview" class="d-none">
-                                <button class="btn btn-light delete-btn" type="button"><i class="fas fa-trash"></i></button>
-                                <span class="ml-3 description"></span>
+                        <div id="main-workout-overview" class="d-none row">
+                            <div class="col-2">
+                                <button class="btn btn-light delete-btn" ui-context="main-workout" db-context="main" type="button"><i class="fas fa-trash"></i></button>
                             </div>
-                            <button id="add-main-workout-btn" type="button" class="btn btn-light add-btn d-none" title="Add your main workout">
-                                <span class="add-btn-text">+</span>
-                            </button>
+                            <div class="col-10">
+                                <span class="description"></span>
+                            </div>
                         </div>
+                        <button id="add-main-workout-btn" type="button" class="btn btn-light add-btn d-none" title="Add your main workout">
+                            <span class="add-btn-text">+</span>
+                        </button>
                         <hr>
                         <p>Cool down</p>
-                        <div class="d-flex justify-content-center">
-                            <div id="post-workout-overview" class="d-none">
-                                <button class="btn btn-light delete-btn" type="button"><i class="fas fa-trash"></i></button>
-                                <span class="ml-3 description"></span>
+                        <div id="post-workout-overview" class="d-none row">
+                            <div class="col-2">
+                                <button class="btn btn-light delete-btn" ui-context="post-workout" db-context="post" type="button"><i class="fas fa-trash"></i></button>
                             </div>
-                            <button id="add-post-workout-btn" type="button" class="btn btn-light add-btn d-none" title="Add cool down">
-                                <span class="add-btn-text">+</span>
-                            </button>
+                            <div class="col-10">
+                                <span class="description"></span>
+                            </div>
                         </div>
+                        <button id="add-post-workout-btn" type="button" class="btn btn-light add-btn d-none" title="Add cool down">
+                            <span class="add-btn-text">+</span>
+                        </button>
                     </div>
                     <div id="workout-type-selection" class="tab-pane">
                         <div class="form-group">

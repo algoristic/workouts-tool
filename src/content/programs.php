@@ -61,6 +61,16 @@
 <?php endif ?>
 <script type="text/javascript">
     $(function() {
+        <?php if($isRoutinePage): ?>
+            $('.use-program').click(function() {
+                let trainingId = wizard.id.get();
+                let programId = $(this).attr('program-id');
+                let trainingPosition = wizard.context.get().dbContext;
+                api.createProgramWorkout(trainingId, programId, trainingPosition, function(response) {
+                    updateRoutine(trainingId, response.id);
+                });
+            });
+        <?php endif ?>
         $('#programs-table').DataTable({
             ordering: false,
             lengthChange: false,

@@ -144,14 +144,14 @@ function getWorkoutDescription($trainingId) {
     return 'Single Workout: ' . $workout['name'] . ' (' . $workout['type'] . ', ' . $workout['focus'] . ', ' . $workout['difficulty'] . ')';
 }
 
-function getProgramDescription($programId) {
-    $workoutId = query('
+function getProgramDescription($trainingId) {
+    $programId = query('
         SELECT
             p.program_id AS id
         FROM
             program_workouts p
         WHERE
-            p.training_id = ' . $programId . '
+            p.training_id = ' . $trainingId . '
     ')->fetch_assoc()['id'];
     $program = query('
         SELECT
@@ -163,6 +163,8 @@ function getProgramDescription($programId) {
         FROM
             programs p
             LEFT JOIN diffculties d ON p.difficulty_id = d.id
+        WHERE
+            p.id = ' . $programId . '
     ')->fetch_assoc();
     return 'Program Workout: ' . $program['name'] . ' (' . $program['days'] . ' days, ' . $program['difficulty'] . ')';
 }
