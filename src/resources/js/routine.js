@@ -60,14 +60,13 @@ $(function() {
             $('tr[training-day-id="' + trainingId + '"]').attr(trainingPosition + '-training-id', '');
         });
     });
+    $('#cancel-workout-changes').click(function() {
+        wizard.context.set(context.overview);
+    });
     $('#select-btn').click(function() {
         let workoutType = $('#type-selector').find(':selected').val();
         wizard.workoutType.set(workoutType);
         $('#sub-control').removeClass('d-none');
-        $('#cancel-workout-changes').click(function() {
-            wizard.clearWorkout(workoutType);
-            wizard.context.set(context.overview);
-        });
     });
     $('#training-day-name').blur(function() {
         let id = wizard.id.get();
