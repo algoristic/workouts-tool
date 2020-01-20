@@ -22,7 +22,7 @@ function authenticate() {
     );
     if(isset($_SESSION['user_id'])) {
         if(empty($_GET['page'])) {
-            $_GET['page'] = 'workouts';
+            $_GET['page'] = 'today';
         }
         return True;
     } else {
@@ -38,7 +38,7 @@ function authenticate() {
             if(($username === $user) && ($pw === $password)) {
                 $_SESSION['user_id'] = $user;
                 if(!isset($_GET['page'])) {
-                    $_GET['page'] = 'workouts';
+                    $_GET['page'] = 'today';
                 }
                 storeUser($user);
                 return True;
