@@ -14,6 +14,11 @@ function getConnection() {
 
 function query($sql) {
     $connection = getConnection();
+    if(isset($_GET['debug'])) {
+        echo '<br>';
+        echo $sql;
+        echo '<br>';
+    }
     try {
         return $connection->query($sql);
     } finally {
@@ -23,6 +28,11 @@ function query($sql) {
 
 function insert($sql) {
     $connection = getConnection();
+    if(isset($_GET['debug'])) {
+        echo '<br>';
+        echo $sql;
+        echo '<br>';
+    }
     try {
         if($connection->query($sql) === True) {
             return $connection->insert_id;
@@ -253,6 +263,20 @@ function getWorkout($name) {
     return query('SELECT * FROM workouts w WHERE w.name = "' . $name . '"');
 }
 
+function getProgramByTraining($trainingId) {
+    return query('
+        SELECT
+            p.name AS name,
+            pw.current_step AS day
+        FROM
+            trainings t
+            LEFT JOIN program_workouts pw ON t.id = pw.training_id
+            LEFT JOIN programs p ON pw.program_id = p.id
+        WHERE
+            t.id = ' . $trainingId . '
+    ')->fetch_assoc();
+}
+
 function getProgram($name) {
     return query('SELECT * FROM programs p WHERE p.name = "' . $name . '"');
 }
@@ -265,6 +289,129 @@ function workoutIsInDatabase($name) {
 function programIsInDatabase($name) {
     $result = query('SELECT id FROM programs WHERE name = "' . $name . '"');
     return ($result->num_rows > 0);
+}
+
+function userHasRoutines() {
+    $user = $_SESSION['user_id'];
+    return query('
+        SELECT
+            r.id AS id
+        FROm
+            routines r
+        WHERE
+            r.user = "' . $user . '"
+    ')->num_rows > 0;
+}
+
+function getOpenRoutines() {
+    $user = $_SESSION['user_id'];
+    return query('
+        SELECT
+            r.id AS id,
+            r.pre_training_id AS pre,
+            r.main_training_id AS main,
+            r.post_training_id AS post
+        FROM
+            routines r
+        WHERE
+            r.done = False AND
+            r.user = "' . $user . '"
+        ORDER BY
+            r.day ASC
+        LIMIT 1
+    ');
+}
+
+function lastDoneTrainingWasToday() {
+    $user = $_SESSION['user_id'];
+    $result = query('
+        SELECT
+            DATEDIFF(r.last_done, CURRENT_DATE()) AS diff
+        FROM
+            routines r
+        WHERE
+            r.done = True AND
+            r.user = "' . $user . '"
+        ORDER BY
+            r.day DESC
+        LIMIT 1
+    ')->fetch_assoc()['diff'];
+    return ($result == 0);
+}
+
+function resetRoutines() {
+    $user = $_SESSION['user_id'];
+    query('
+        UPDATE
+            routines r
+        SET
+            r.done = False,
+            r.last_done = Null
+        WHERE
+            r.user = "' . $user . '"
+    ');
+    query('
+        UPDATE
+            trainings t
+        SET
+            t.done = False,
+            t.skipped = False
+        WHERE
+            t.id IN (
+                SELECT
+                    r.pre_training_id
+                FROM
+                    routines r
+                WHERE
+                    r.user = "' . $user . '"
+            ) OR
+            t.id IN (
+                SELECT
+                    r.main_training_id
+                FROM
+                    routines r
+                WHERE
+                    r.user = "' . $user . '"
+            ) OR
+            t.id IN (
+                SELECT
+                    r.post_training_id
+                FROM
+                    routines r
+                WHERE
+                    r.user = "' . $user . '"
+            )
+    ');
+}
+
+function getTraining($trainingId) {
+    return query('
+        SELECT
+            t.category AS category,
+            t.done AS done
+        FROM
+            trainings t
+        WHERE
+            t.id = ' . $trainingId . '
+    ');
+}
+
+function getWorkoutName($trainingId) {
+    return query('
+        SELECT
+            wo.name AS name
+        FROM
+            workouts wo
+        WHERE
+            wo.id IN(
+                SELECT
+                    sw.workout_id
+                FROM
+                    single_workouts sw
+                WHERE
+                    sw.training_id = ' . $trainingId . '
+            )
+    ')->fetch_assoc()['name'];
 }
 
 function createWorkout($name, $ui_name, $description, $focus_id, $type_id, $difficulty_id) {
