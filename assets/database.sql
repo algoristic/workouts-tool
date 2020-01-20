@@ -52,7 +52,9 @@ CREATE TABLE workouts_in_collection(
 /* TRAINING ROUTINES */
 CREATE TABLE trainings(
     id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    category VARCHAR(255) NOT NULL
+    category VARCHAR(255) NOT NULL,
+    done BOOLEAN DEFAULT 0,
+    skipped BOOLEAN DEFAULT 0
 );
 CREATE TABLE single_workouts(
     id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
@@ -97,6 +99,7 @@ CREATE TABLE routines(
     pre_training_id INT(6) UNSIGNED,
     main_training_id INT(6) UNSIGNED,
     post_training_id INT(6) UNSIGNED,
+    last_done DATE,
     FOREIGN KEY (pre_training_id) REFERENCES trainings(id) ON DELETE CASCADE,
     FOREIGN KEY (main_training_id) REFERENCES trainings(id) ON DELETE CASCADE,
     FOREIGN KEY (post_training_id) REFERENCES trainings(id) ON DELETE CASCADE
