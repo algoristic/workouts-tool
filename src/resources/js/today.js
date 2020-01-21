@@ -64,6 +64,14 @@ buttons = {
             });
         }
     },
+    'anotherRandomWorkout': {
+        text: 'Get Another Random Workout',
+        icon: 'forward',
+        color: 'secondary',
+        fn: () => {
+            reload();
+        }
+    },
     'markAsDone': {
         text: 'Mark As Done',
         icon: 'check',
