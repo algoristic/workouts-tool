@@ -485,6 +485,28 @@ function skipRoutine($routineId) {
     ');
 }
 
+function resetTrainings($routineId) {
+    $routine = query('
+        SELECT
+            r.pre_training_id AS pre,
+            r.main_training_id AS main,
+            r.post_training_id AS post
+        FROM
+            routines r
+        WHERE
+            r.id = ' . $routineId . '
+    ')->fetch_assoc();
+    query(sprintf('
+        UPDATE
+            trainings t
+        SET
+            t.done = 0,
+            t.skipped = 0
+        WHERE
+            t.id IN (%s, %s, %s)
+    ', $routine['pre'], $routine['main'], $routine['post']));
+}
+
 function createWorkout($name, $ui_name, $description, $focus_id, $type_id, $difficulty_id) {
     $insert_query = 'INSERT INTO workouts (name, ui_name, description, focus_id, type_id, difficulty_id) VALUES ("' . $name . '", "' . $ui_name . '", "' . $description . '", "' . $focus_id . '", "' . $type_id . '", "' . $difficulty_id . '")';
     query($insert_query);

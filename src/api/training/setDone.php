@@ -30,6 +30,7 @@ try {
         } else {
             setRoutineDone($routineId);
         }
+        resetTrainings($routineId);
     }
     $response = array('Status' => 'Success');
 } catch (exception $e) {
