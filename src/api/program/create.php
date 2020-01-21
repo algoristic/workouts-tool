@@ -10,7 +10,7 @@ if(!$debug) {
 }
 $response;
 try {
-    $newProgramId = createEmptySingleProgram($programName);
+    $newProgramId = createEmptySingleProgram($programName, $trainingId);
     updateRoutine($trainingId, $newProgramId, $trainingPosition);
     $response = array('Status' => 'Success', 'id' => $newProgramId);
 } catch (exception $e) {

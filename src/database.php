@@ -203,11 +203,74 @@ function createEmptySingleWorkout($workoutName) {
     return $newWorkoutId;
 }
 
-function createEmptySingleProgram($programName) {
-    $newProgramId = insert('INSERT INTO trainings (category) VALUES ("program_workouts")');
-    $programPlanId = getProgram($programName)->fetch_assoc()['id'];
-    query('INSERT INTO program_workouts (program_id, training_id) VALUES (' . $programPlanId . ', ' . $newProgramId . ')');
-    return $newProgramId;
+function createEmptySingleProgram($programName, $routineId) {
+    $programId = getExistingProgramWorkout($programName, $routineId);
+    if($programId === Null) {
+        $newProgramId = insert('INSERT INTO trainings (category) VALUES ("program_workouts")');
+        $programId = $newProgramId;
+        $programPlanId = getProgram($programName)->fetch_assoc()['id'];
+        query('INSERT INTO program_workouts (program_id, training_id) VALUES (' . $programPlanId . ', ' . $newProgramId . ')');
+    }
+    return $programId;
+}
+
+function getExistingProgramWorkout($programName, $routineId) {
+    $allTrainingsByUser = getAllTrainingIds($routineId);
+    $res = query('
+        SELECT
+        	pw.training_id AS id
+        FROM
+        	program_workouts pw
+            LEFT JOIN programs p ON pw.program_id = p.id
+        WHERE
+        	pw.training_id IN (' . $allTrainingsByUser . ') AND
+            p.name = "' . $programName . '"
+        LIMIT 1
+    ');
+    if($res->num_rows > 0) {
+        return $res->fetch_assoc()['id'];
+    } else {
+        return Null;
+    }
+}
+
+function getAllTrainingIds($routineId) {
+    $idString = '';
+    $warmups = getTrainingIds($routineId, 'pre');
+    $mainTrainings = getTrainingIds($routineId, 'main');
+    $cooldowns = getTrainingIds($routineId, 'post');
+    $first = True;
+    foreach(array($warmups, $mainTrainings, $cooldowns) as $trainings) {
+        foreach($trainings as $key => $training) {
+            if(isset($training['id'])) {
+                if(!$first) {
+                    $idString .= ', ';
+                }
+                $idString .= $training['id'];
+                $first = False;
+            }
+        }
+    }
+    return $idString;
+}
+
+function getTrainingIds($routineId, $prefix) {
+    return query('
+        SELECT
+            r1.' . $prefix . '_training_id AS id
+        FROM
+            routines r1
+        WHERE
+            r1.user = (
+                SELECT
+                    r2.user
+                FROM
+                    routines r2
+                WHERE
+                    r2.id = 176
+                LIMIT 1
+            )
+    ');
 }
 
 function deleteSubWorkout($trainingId, $trainingPosition) {
