@@ -1,3 +1,4 @@
+<?php include 'table-style.php' ?>
 <?php include 'today-style.php' ?>
 <?php
 $isFinished = True;
@@ -6,6 +7,8 @@ $trainingCtx = 'finished';
 $id = Null;
 $isLastWorkout = False;
 $link = '';
+$day = Null;
+$days = Null;
 if(userHasRoutines()) {
     $routines = getOpenRoutines();
     if($routines->num_rows < 1) {
@@ -52,6 +55,8 @@ if(userHasRoutines()) {
                         case 'program_workouts':
                             $program = getProgramByTraining($id);
                             $trainingDay = $program['day'];
+                            $day = $trainingDay;
+                            $days = $program['days'];
                             $link .= 'programs/';
                             $link .= $program['name'];
                             $link .= '/day-';
@@ -75,11 +80,6 @@ if(userHasRoutines()) {
         name: '<?php echo $routineCtx ?>'<?php if($id != Null): ?>,
         id: <?php echo $id ?><?php endif; ?>
     };
-    isLastStep = <?php if($isLastWorkout) {
-        echo 'true';
-    } else {
-        echo 'false';
-    } ?>;
 </script>
 <div id="panel" class="tab-content text-center">
     <div class="tab-pane active">
@@ -95,12 +95,31 @@ if(userHasRoutines()) {
                     You are finished &mdash; <span style="text-decoration:underline">for today</span>!
                 </p>
             <?php else: ?>
-                <img class="img-fluid" src="<?php echo $link ?>">
+                <div class="row">
+                    <div class="col-lg-4 offset-lg-4">
+                        <img class="mx-3 img-fluid" src="<?php echo $link ?>">
+                    </div>
+                </div>
             <?php endif ?>
         </div>
     </div>
 </div>
-<div class="mt-3 row">
-    <div id="workout-controls" class="col-lg-4 offset-lg-4"></div>
+<div class="mx-2 mt-3 row">
+    <div id="workout-controls"
+        class="col-lg-4 offset-lg-4"
+        is-last-step="<?php if($isLastWorkout) {
+            echo 'true';
+        } else {
+            echo 'false';
+        } ?>"
+        <?php if($day != Null): ?>
+            day="<?php echo($day) ?>"
+        <?php endif ?>
+        <?php if($days != Null): ?>
+            all-days="<?php echo($days) ?>"
+        <?php endif ?>
+        routine="<?php echo($routineId) ?>"
+        ></div>
 </div>
+<script src="/resources/js/api.js"></script>
 <script src="/resources/js/today.js"></script>

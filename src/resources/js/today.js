@@ -1,3 +1,7 @@
+reload = (response) => {
+    window.location.reload(true);
+}
+
 routineContext = {
     'pre': {
         title: 'Warmup'
@@ -18,7 +22,10 @@ buttons = {
         icon: 'times',
         color: 'danger',
         fn: () => {
-            alert('skipWholeDay');
+            let routineId = controls.getRoutineId();
+            api.skipRoutine(routineId, function(response) {
+                reload();
+            });
         }
     },
     'skipThisWorkout': {
@@ -26,7 +33,17 @@ buttons = {
         icon: 'times',
         color: 'warning',
         fn: () => {
-            alert('skipThisWorkout');
+            if(controls.isLastStep()) {
+                let routineId = controls.getRoutineId();
+                api.skipRoutine(routineId, function(response) {
+                    reload();
+                });
+            } else {
+                let trainingId = controls.getTrainingId();
+                api.skipTraining(trainingId, function(response) {
+                    reload();
+                });
+            }
         }
     },
     'skipToNextWorkout': {
@@ -34,7 +51,17 @@ buttons = {
         icon: 'forward',
         color: 'warning',
         fn: () => {
-            alert('skipToNextWorkout');
+            let trainingId = controls.getTrainingId();
+            let day = controls.getDay();
+            let allDays = controls.getAllDays();
+            if(day === allDays) {
+                day = 1;
+            } else {
+                day++;
+            }
+            api.setTrainingStep(trainingId, day, function(response) {
+                reload();
+            });
         }
     },
     'markAsDone': {
@@ -42,7 +69,27 @@ buttons = {
         icon: 'check',
         color: 'success',
         fn: () => {
-            alert('markAsDone');
+            let trainingId = controls.getTrainingId();
+            if(controls.hasDay()) {
+                let day = controls.getDay();
+                let allDays = controls.getAllDays();
+                if(day === allDays) {
+                    day = 1;
+                } else {
+                    day++;
+                }
+                api.setTrainingStep(trainingId, day);
+            }
+            if(controls.isLastStep()) {
+                let routineId = controls.getRoutineId();
+                api.finishRoutine(trainingId, routineId, function(response) {
+                    reload();
+                });
+            } else {
+                api.finishTraining(trainingId, function(response) {
+                    reload();
+                });
+            }
         }
     }
 };
@@ -67,11 +114,38 @@ trainingContext = {
     }
 };
 
+controls = $('#workout-controls');
+
+controls.isLastStep = () => {
+    return (controls.attr('is-last-step') === 'true');
+}
+
+controls.getTrainingId = () => {
+    return training.id;
+}
+
+controls.getRoutineId = () => {
+    return controls.attr('routine');
+}
+
+controls.hasDay = () => {
+    return (controls.attr('day') !== undefined);
+}
+
+controls.getDay = () => {
+    return parseInt(controls.attr('day'));
+}
+
+controls.getAllDays = () => {
+    return parseInt(controls.attr('all-days'));
+}
+
 displayButtons = (category) => {
     let categoryContext = trainingContext[category];
     categoryContext.buttons.forEach(function(index) {
         let button = buttons[index];
         let buttonHTML = $('<button/>', {
+            id: index,
             text: button.text,
             class: ('btn btn-block btn-' + button.color)
         });
@@ -81,7 +155,7 @@ displayButtons = (category) => {
         $('<i/>', {
             class: ('ml-2 fas fa-' + button.icon)
         }).appendTo(buttonHTML);
-        buttonHTML.appendTo($('#workout-controls'));
+        buttonHTML.appendTo(controls);
     });
 }
 

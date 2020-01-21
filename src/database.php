@@ -267,6 +267,7 @@ function getProgramByTraining($trainingId) {
     return query('
         SELECT
             p.name AS name,
+            p.days AS days,
             pw.current_step AS day
         FROM
             trainings t
@@ -275,6 +276,17 @@ function getProgramByTraining($trainingId) {
         WHERE
             t.id = ' . $trainingId . '
     ')->fetch_assoc();
+}
+
+function setProgramStep($trainingId, $step) {
+    query('
+        UPDATE
+            program_workouts p
+        SET
+            p.current_step = ' . $step . '
+        WHERE
+            p.training_id = ' . $trainingId . '
+    ');
 }
 
 function getProgram($name) {
@@ -293,7 +305,7 @@ function programIsInDatabase($name) {
 
 function userHasRoutines() {
     $user = $_SESSION['user_id'];
-    return query('
+    $userHasRoutines = query('
         SELECT
             r.id AS id
         FROm
@@ -301,6 +313,17 @@ function userHasRoutines() {
         WHERE
             r.user = "' . $user . '"
     ')->num_rows > 0;
+    $lastRoutineNotToday = query('
+        SELECT
+            r.id AS id
+        FROm
+            routines r
+        WHERE
+            r.user = "' . $user . '" AND
+            r.done = 1 AND
+            r.last_done = CURRENT_DATE
+    ')->num_rows == 0;
+    return ($userHasRoutines && $lastRoutineNotToday);
 }
 
 function getOpenRoutines() {
@@ -412,6 +435,54 @@ function getWorkoutName($trainingId) {
                     sw.training_id = ' . $trainingId . '
             )
     ')->fetch_assoc()['name'];
+}
+
+function setTrainingDone($trainingId) {
+    query('
+        UPDATE
+            trainings t
+        SET
+            t.done = True
+        WHERE
+            t.id = ' . $trainingId . '
+    ');
+}
+
+function skipTraining($trainingId) {
+    query('
+        UPDATE
+            trainings t
+        SET
+            t.done = 1,
+            t.skipped = 1
+        WHERE
+            t.id = ' . $trainingId . '
+    ');
+}
+
+function setRoutineDone($routineId) {
+    query('
+        UPDATE
+            routines r
+        SET
+            r.done = 1,
+            r.last_done = CURRENT_DATE()
+        WHERE
+            r.id = ' . $routineId . '
+    ');
+}
+
+function skipRoutine($routineId) {
+    query('
+        UPDATE
+            routines r
+        SET
+            r.done = 1,
+            r.skipped = 1,
+            r.last_done = CURRENT_DATE()
+        WHERE
+            r.id = ' . $routineId . '
+    ');
 }
 
 function createWorkout($name, $ui_name, $description, $focus_id, $type_id, $difficulty_id) {

@@ -41,6 +41,35 @@ api = {
             'subWorkoutId': subWorkoutId
         }, handler);
     },
+    setTrainingStep: (trainingId, step, handler) => {
+        api.callEnpoint('program/setStep', {
+            'trainingId': trainingId,
+            'step': step
+        }, handler);
+    },
+    finishTraining: (trainingId, handler) => {
+        api.callEnpoint('training/setDone', {
+            'trainingId': trainingId
+        }, handler);
+    },
+    finishRoutine: (trainingId, routineId, handler) => {
+        api.callEnpoint('training/setDone', {
+            'trainingId': trainingId,
+            'routineId': routineId
+        }, handler);
+    },
+    skipTraining: (trainingId, handler) => {
+        api.callEnpoint('training/setDone', {
+            'trainingId': trainingId,
+            'skipTraining': true
+        }, handler);
+    },
+    skipRoutine: (routineId, handler) => {
+        api.callEnpoint('training/setDone', {
+            'routineId': routineId,
+            'skipRoutine': true
+        }, handler);
+    },
     callEnpoint: (endpoint, params, handler) => {
         endpoint += '?';
         let firstElem = true;
