@@ -97,7 +97,7 @@ if(userHasRoutines()) {
             <?php else: ?>
                 <div class="row">
                     <div class="col-lg-4 offset-lg-4">
-                        <img class="mx-3 img-fluid" src="<?php echo $link ?>">
+                        <img class="px-2 img-fluid" src="<?php echo $link ?>">
                     </div>
                 </div>
             <?php endif ?>
