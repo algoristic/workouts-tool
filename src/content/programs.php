@@ -22,7 +22,7 @@
                     <td class="program-difficulty"><?php echo $program['difficulty'] ?></td>
                     <td class="days-col"><?php echo $program['days'] ?></td>
                     <?php if($isRoutinePage): ?>
-                        <td><a class="use-program btn btn-block" program-id="<?php echo $program['id'] ?>" title="Use this program">&#x2bc8;</a></td>
+                        <td><a class="use-program btn btn-block" program-id="<?php echo $program['id'] ?>" title="Use this program"><i class="fas fa-caret-right"></i></a></td>
                     <?php endif ?>
                 </tr>
             <?php endforeach ?>
