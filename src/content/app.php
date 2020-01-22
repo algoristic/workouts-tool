@@ -1,27 +1,33 @@
 <?php
 $tabs = array(
-    'today' => 'Today',
-    'routine' => 'Routine',
-    'workouts' => 'Workouts',
-    'programs' => 'Programs',
-    'system' => 'System'
+    'today' => array('Training', 'dumbbell'),
+    'routine' => array('Routine', 'file-signature'),
+    'workouts' => array('Workouts', 'running'),
+    'programs' => array('Programs', 'clipboard'),
+    'system' => array('System', 'cogs')
 );
 ?>
 <div id="app-wrapper">
     <!-- MAIN MENU -->
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar">
+        <button class="ml-auto navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="navbar-nav">
-                <?php foreach ($tabs as $tab => $name): ?>
+                <?php foreach ($tabs as $tab => $data): ?>
                     <li class="nav-item">
-                        <a class="nav-link <?php echo getActiveMarker($tab); ?>" href="/?page=<?php echo $tab ?>"><?php echo $name ?></a>
+                        <a class="nav-link <?php echo getActiveMarker($tab); ?>" href="/?page=<?php echo $tab ?>">
+                            <i class="fas fa-<?php echo $data[1] ?>"></i>
+                            <?php echo $data[0] ?>
+                        </a>
                     </li>
                 <?php endforeach ?>
-                    <li class="ml-auto nav-item">
-                        <a class="nav-link text-secondary" href="./logout.php">Logout</a>
+                    <li class="nav-item">
+                        <a class="nav-link text-secondary" href="./logout.php">
+                            <i class="fas fa-sign-out-alt"></i>
+                            Logout
+                        </a>
                     </li>
             </ul>
         </div>
@@ -30,7 +36,7 @@ $tabs = array(
 
     <!-- APP CONTENTS -->
     <div class="tab-content main-app container">
-        <?php foreach ($tabs as $tab => $name): ?>
+        <?php foreach ($tabs as $tab => $data): ?>
             <div class="tab-pane <?php echo getActiveMarker($tab); ?>">
                 <?php if(isActivePage($tab)): ?>
                     <?php include ($tab . ".php"); ?>
