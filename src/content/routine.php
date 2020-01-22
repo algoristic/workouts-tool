@@ -105,14 +105,14 @@
             <div class="modal-footer">
                 <div id="main-control">
                     <div class="d-flex">
-                        <button id="cancel-changes" type="button" class="btn btn-secondary">Cancel</button>
-                        <button id="save-changes" type="button" class="btn btn-primary ml-2">Save</button>
-                        <button id="delete" type="button" class="btn btn-danger ml-2">Delete</button>
+                        <button id="cancel-changes" type="button" class="btn btn-secondary"><i class="fas fa-times mr-1"></i>Cancel</button>
+                        <button id="save-changes" type="button" class="btn btn-primary ml-2"><i class="fas fa-save mr-1"></i>Save</button>
+                        <button id="delete" type="button" class="btn btn-danger ml-2"><i class="fas fa-trash mr-1"></i>Delete</button>
                     </div>
                 </div>
                 <div id="sub-control" class="d-none">
                     <div class="d-flex">
-                        <button id="cancel-workout-changes" type="button" class="btn btn-secondary">Cancel</button>
+                        <button id="cancel-workout-changes" type="button" class="btn btn-secondary"><i class="fas fa-times mr-1"></i>Cancel</button>
                         <!--
                         <button id="save-workout-changes" type="button" class="btn btn-primary">Save</button>
                         -->
