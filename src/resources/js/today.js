@@ -169,8 +169,13 @@ displayButtons = (category) => {
 
 displayTraining = (trainingVar) => {
     currentTraining = routineContext[trainingVar.name];
-    $('<h2/>', {
-        text: currentTraining.title
+    let options = {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric'
+    };
+    $('<h3/>', {
+        html: (currentTraining.title + '<small class="ml-2 text-secondary">(' + (new Date().toLocaleString('en-US', options)) + ')</small>')
     }).appendTo($('#head'));
 }
 

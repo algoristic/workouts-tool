@@ -83,7 +83,7 @@ if(userHasRoutines()) {
 </script>
 <div id="panel" class="tab-content text-center">
     <div class="tab-pane active">
-        <div id="head">
+        <div id="head" class="text-left ml-2">
 
         </div>
         <div id="content">
@@ -95,31 +95,32 @@ if(userHasRoutines()) {
                     You are finished &mdash; <span style="text-decoration:underline">for today</span>!
                 </p>
             <?php else: ?>
-                <div class="row">
-                    <div class="col-lg-4 offset-lg-4">
+                <div class="row align-items-center">
+                    <div class="col-md-6 col-lg-4 offset-lg-2">
                         <img class="px-2 img-fluid" src="<?php echo $link ?>">
                     </div>
+                    <div id="workout-controls"
+                        class="px-2 pt-2 col-md-6 col-lg-4"
+                        is-last-step="<?php if($isLastWorkout) {
+                            echo 'true';
+                        } else {
+                            echo 'false';
+                        } ?>"
+                        <?php if($day != Null): ?>
+                            day="<?php echo($day) ?>"
+                        <?php endif ?>
+                        <?php if($days != Null): ?>
+                            all-days="<?php echo($days) ?>"
+                        <?php endif ?>
+                        routine="<?php echo($routineId) ?>"
+                        ></div>
                 </div>
             <?php endif ?>
         </div>
     </div>
 </div>
 <div class="mx-2 mt-3 row">
-    <div id="workout-controls"
-        class="col-lg-4 offset-lg-4"
-        is-last-step="<?php if($isLastWorkout) {
-            echo 'true';
-        } else {
-            echo 'false';
-        } ?>"
-        <?php if($day != Null): ?>
-            day="<?php echo($day) ?>"
-        <?php endif ?>
-        <?php if($days != Null): ?>
-            all-days="<?php echo($days) ?>"
-        <?php endif ?>
-        routine="<?php echo($routineId) ?>"
-        ></div>
+
 </div>
 <script src="/resources/js/api.js"></script>
 <script src="/resources/js/today.js"></script>
