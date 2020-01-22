@@ -267,7 +267,7 @@ function getTrainingIds($routineId, $prefix) {
                 FROM
                     routines r2
                 WHERE
-                    r2.id = 176
+                    r2.id = ' . $routineId . '
                 LIMIT 1
             )
     ');
