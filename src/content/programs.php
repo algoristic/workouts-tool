@@ -2,6 +2,28 @@
 <?php include 'overview-style.php' ?>
 <?php $isRoutinePage = ($_GET['page'] == 'routine'); ?>
 <?php $isProgramsPage = ($_GET['page'] == 'programs'); ?>
+<div class="d-flex flex-row-reverse">
+    <button class="toggle-btn btn btn-secondary" data-toggle="collapse" data-target="#program-search-area">
+        <i class="btn-icon mr-1 fas fa-angle-up"></i>
+        <span class="btn-text">Hide Search</span>
+    </button>
+</div>
+<div id="program-search-area" class="row px-2 collapse show">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="select-program-1">Difficulty:</label>
+            <select id="select-program-1" class="form-control">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group mb-0">
+            <label for="select-program-name">Name:</label>
+            <input id="select-program-name" class="form-control" type="text"></input>
+        </div>
+    </div>
+</div>
 <table id="programs-table" class="table">
     <thead>
         <tr>
@@ -75,10 +97,33 @@
                 });
             });
         <?php endif ?>
-        $('#programs-table').DataTable({
+        let table = $('#programs-table').DataTable({
             ordering: false,
-            lengthChange: false,
-            stateSave: true
+            lengthChange: false
+        });
+        /* build searchfield for name-column */
+        table.columns([0]).every(function() {
+            let column = this;
+            let input = $('#select-program-name').on('keyup', function() {
+                let val = $.fn.dataTable.util.escapeRegex(
+                    $(this).val()
+                );
+                column.search(val ? val : '', true, false).draw();
+            });
+        });
+        /* build dropdowns for type, focus & difficulty */
+        table.columns([1]).every(function() {
+            let column = this;
+            let index = column[0][0];
+            let select = $('#select-program-' + index).on('change', function () {
+                let val = $.fn.dataTable.util.escapeRegex(
+                    $(this).val()
+                );
+                column.search(val ? '^' + val + '$' : '', true, false).draw();
+            });
+            column.data().unique().sort().each(function(d, j) {
+                select.append('<option value="' + d + '">' + d + '</option>')
+            });
         });
     });
 </script>

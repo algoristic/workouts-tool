@@ -1,44 +1,42 @@
 <?php include 'table-style.php' ?>
 <?php include 'overview-style.php' ?>
-<?php include 'workouts-style.php' ?>
 <?php $isRoutinePage = ($_GET['page'] == 'routine'); ?>
 <?php $isWorkoutsPage = ($_GET['page'] == 'workouts'); ?>
 <div class="d-flex flex-row-reverse">
-    <button class="toggle-btn btn btn-secondary" data-toggle="collapse" data-target="#search-area">
+    <button class="toggle-btn btn btn-secondary btn-sm" data-toggle="collapse" data-target="#workout-search-area">
         <i class="btn-icon mr-1 fas fa-angle-up"></i>
         <span class="btn-text">Hide Search</span>
     </button>
 </div>
-<div id="search-area" class="row px-2 collapse show">
-    <!-- TODO: make this collapsible -->
+<div id="workout-search-area" class="row px-2 collapse show">
     <div class="col-md-6">
-        <div id="col-1" class="form-group">
-            <label for="select-1">Type:</label>
-            <select id="select-1" class="form-control">
+        <div class="form-group">
+            <label for="select-workout-1">Type:</label>
+            <select id="select-workout-1" class="form-control">
                 <option value=""></option>
             </select>
         </div>
     </div>
     <div class="col-md-6">
-        <div id="col-2" class="form-group">
-            <label for="select-2">Focus:</label>
-            <select id="select-2" class="form-control">
+        <div class="form-group">
+            <label for="select-workout-2">Focus:</label>
+            <select id="select-workout-2" class="form-control">
                 <option value=""></option>
             </select>
         </div>
     </div>
     <div class="col-md-6">
-        <div id="col-3" class="form-group">
-            <label for="select-3">Difficulty:</label>
-            <select id="select-3" class="form-control">
+        <div class="form-group">
+            <label for="select-workout-3">Difficulty:</label>
+            <select id="select-workout-3" class="form-control">
                 <option value=""></option>
             </select>
         </div>
     </div>
     <div class="col-md-6">
-        <div id="col-name" class="form-group">
-            <label for="select-name">Name:</label>
-            <input id="select-name" class="form-control" type="text"></input>
+        <div class="form-group mb-0">
+            <label for="select-workout-name">Name:</label>
+            <input id="select-workout-name" class="form-control" type="text"></input>
         </div>
     </div>
 </div>
@@ -174,7 +172,7 @@
         /* build searchfield for name-column */
         table.columns([0]).every(function() {
             let column = this;
-            let input = $('#select-name').on('keyup', function() {
+            let input = $('#select-workout-name').on('keyup', function() {
                 let val = $.fn.dataTable.util.escapeRegex(
                     $(this).val()
                 );
@@ -185,7 +183,7 @@
         table.columns([1, 2, 3]).every(function() {
             let column = this;
             let index = column[0][0];
-            let select = $('#select-' + index).on('change', function () {
+            let select = $('#select-workout-' + index).on('change', function () {
                 let val = $.fn.dataTable.util.escapeRegex(
                     $(this).val()
                 );

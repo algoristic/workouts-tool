@@ -21,6 +21,13 @@
 #days-overview img {
     max-height: 480px;
 }
+table,
+table.dataTable {
+    margin-top: 1rem !important;
+}
+.dataTables_filter {
+    display: none;
+}
 .workout-table {
     width: unset;
     margin: auto;
