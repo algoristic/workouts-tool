@@ -56,6 +56,14 @@ function buildOverviewNav(program, day) {
 }
 
 $(function() {
+    $('#program-search-area').on('shown.bs.collapse', function() {
+        $('.toggle-btn .btn-text').text('Hide Search');
+        $('.toggle-btn .btn-icon').addClass('fa-rotate-180');
+    });
+    $('#program-search-area').on('hidden.bs.collapse', function() {
+        $('.toggle-btn .btn-text').text('Show Search');
+        $('.toggle-btn .btn-icon').removeClass('fa-rotate-180');
+    });
     $('#go-back, #go-forward').click(function() {
         let program = $('#days-overview img').attr('preview-program');
         let day = $(this).attr('preview-target');

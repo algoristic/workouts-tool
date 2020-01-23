@@ -3,12 +3,12 @@
 <?php $isRoutinePage = ($_GET['page'] == 'routine'); ?>
 <?php $isProgramsPage = ($_GET['page'] == 'programs'); ?>
 <div class="d-flex flex-row-reverse">
-    <button class="toggle-btn btn btn-secondary" data-toggle="collapse" data-target="#program-search-area">
-        <i class="btn-icon mr-1 fas fa-angle-up"></i>
-        <span class="btn-text">Hide Search</span>
+    <button class="toggle-btn btn btn-secondary btn-sm" data-toggle="collapse" data-target="#program-search-area">
+        <i class="btn-icon mr-1 fas fa-angle-down"></i>
+        <span class="btn-text">Show Search</span>
     </button>
 </div>
-<div id="program-search-area" class="row px-2 collapse show">
+<div id="program-search-area" class="row px-2 collapse">
     <div class="col-md-6">
         <div class="form-group">
             <label for="select-program-1">Difficulty:</label>

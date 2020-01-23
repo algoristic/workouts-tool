@@ -4,11 +4,11 @@
 <?php $isWorkoutsPage = ($_GET['page'] == 'workouts'); ?>
 <div class="d-flex flex-row-reverse">
     <button class="toggle-btn btn btn-secondary btn-sm mr-2" data-toggle="collapse" data-target="#workout-search-area">
-        <i class="btn-icon mr-1 fas fa-angle-up"></i>
-        <span class="btn-text">Hide Search</span>
+        <i class="btn-icon mr-1 fas fa-angle-down"></i>
+        <span class="btn-text">Show Search</span>
     </button>
 </div>
-<div id="workout-search-area" class="row px-2 collapse show">
+<div id="workout-search-area" class="row px-2 collapse">
     <div class="col-md-6">
         <div class="form-group">
             <label for="select-workout-1">Type:</label>

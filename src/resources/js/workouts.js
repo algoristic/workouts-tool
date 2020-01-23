@@ -80,13 +80,13 @@ function gatherWorkoutInfos(workout) {
 }
 
 $(function() {
-    $('.collapse').on('shown.bs.collapse', function() {
+    $('#workout-search-area').on('shown.bs.collapse', function() {
         $('.toggle-btn .btn-text').text('Hide Search');
-        $('.toggle-btn .btn-icon').removeClass('fa-rotate-180');
-    });
-    $('.collapse').on('hidden.bs.collapse', function() {
-        $('.toggle-btn .btn-text').text('Show Search');
         $('.toggle-btn .btn-icon').addClass('fa-rotate-180');
+    });
+    $('#workout-search-area').on('hidden.bs.collapse', function() {
+        $('.toggle-btn .btn-text').text('Show Search');
+        $('.toggle-btn .btn-icon').removeClass('fa-rotate-180');
     });
     if(isMobile()) {
         $('.hover-preview').click(function() {
