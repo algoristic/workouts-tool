@@ -86,6 +86,7 @@ if(userHasRoutines()) {
         <div id="head" class="text-left ml-2">
 
         </div>
+        <hr>
         <div id="content">
             <?php if($isFinished): ?>
                 <p>
@@ -97,7 +98,9 @@ if(userHasRoutines()) {
             <?php else: ?>
                 <div class="row align-items-center">
                     <div class="col-md-6 col-lg-4 offset-lg-2">
-                        <img class="px-2 img-fluid" src="<?php echo $link ?>">
+                        <div class="img-wrapper px-2">
+                            <img class="img-fluid rounded" src="<?php echo $link ?>">
+                        </div>
                     </div>
                     <div id="workout-controls"
                         class="px-2 pt-2 col-md-6 col-lg-4"
