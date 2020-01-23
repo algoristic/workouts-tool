@@ -19,9 +19,11 @@
 .training-day:hover {
     cursor: pointer;
 }
-.modal-body.table-select {
-    padding-left: 0;
-    padding-right: 0;
+@media screen and (max-width: 767px) {
+    .modal-body.table-select {
+        padding-left: 0;
+        padding-right: 0;
+    }    
 }
 .use-workout {
     cursor: pointer;

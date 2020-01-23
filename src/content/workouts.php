@@ -3,7 +3,7 @@
 <?php $isRoutinePage = ($_GET['page'] == 'routine'); ?>
 <?php $isWorkoutsPage = ($_GET['page'] == 'workouts'); ?>
 <div class="d-flex flex-row-reverse">
-    <button class="toggle-btn btn btn-secondary btn-sm" data-toggle="collapse" data-target="#workout-search-area">
+    <button class="toggle-btn btn btn-secondary btn-sm mr-2" data-toggle="collapse" data-target="#workout-search-area">
         <i class="btn-icon mr-1 fas fa-angle-up"></i>
         <span class="btn-text">Hide Search</span>
     </button>

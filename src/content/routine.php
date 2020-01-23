@@ -29,7 +29,7 @@
     </button>
 </div>
 <div id="training-day-wizard" edit-mode="" training-day-id="" edit-context="" training-day="" edit-context-mode="" class="mobile-fullscreen modal modal-no-border">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
                 <h4>Training Day: <span id="training-day-subtype"></span></h4>
