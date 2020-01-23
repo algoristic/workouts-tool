@@ -1,4 +1,4 @@
-<?php include 'table-style.php' ?>
+    <?php include 'table-style.php' ?>
 <?php include 'overview-style.php' ?>
 <?php $isRoutinePage = ($_GET['page'] == 'routine'); ?>
 <?php $isProgramsPage = ($_GET['page'] == 'programs'); ?>
@@ -17,7 +17,11 @@
         <?php $programs = getAllPrograms(); ?>
         <?php if($programs->num_rows > 0): ?>
             <?php foreach ($programs as $key => $program): ?>
-                <tr id="<?php echo $program['id'] ?>" class="hover-preview" program-description="<?php echo htmlspecialchars($program['description']) ?>">
+                <tr id="<?php echo $program['id'] ?>"
+                    class="hover-preview"
+                    <?php if($isProgramsPage): ?>
+                        program-description="<?php echo htmlspecialchars($program['description']) ?>"
+                    <?php endif ?>>
                     <td class="program-name" details-target="<?php echo $program['id'] ?>"><strong><?php echo $program['name'] ?></strong></td>
                     <td class="program-difficulty"><?php echo $program['difficulty'] ?></td>
                     <td class="days-col"><?php echo $program['days'] ?></td>

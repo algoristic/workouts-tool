@@ -58,7 +58,11 @@
         <?php $workouts = getAllWorkouts(); ?>
         <?php if($workouts->num_rows > 0): ?>
             <?php foreach ($workouts as $key => $workout): ?>
-                <tr id="<?php echo $workout['id'] ?>" class="hover-preview" workout-description="<?php echo htmlspecialchars($workout['description']) ?>">
+                <tr id="<?php echo $workout['id'] ?>"
+                    class="hover-preview"
+                    <?php if($isWorkoutsPage): ?>
+                        workout-description="<?php echo htmlspecialchars($workout['description']) ?>"
+                    <?php endif ?>>
                     <td class="workout-name" details-target="<?php echo $workout['id'] ?>" title="Show details on <?php echo $workout['id'] ?>"><strong><?php echo $workout['name'] ?></strong></td>
                     <td class="type-col"><?php echo $workout['type'] ?></td>
                     <td class="focus-col"><?php echo $workout['focus'] ?></td>
