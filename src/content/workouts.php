@@ -1,7 +1,47 @@
 <?php include 'table-style.php' ?>
 <?php include 'overview-style.php' ?>
+<?php include 'workouts-style.php' ?>
 <?php $isRoutinePage = ($_GET['page'] == 'routine'); ?>
 <?php $isWorkoutsPage = ($_GET['page'] == 'workouts'); ?>
+<div class="d-flex flex-row-reverse">
+    <button class="toggle-btn btn btn-secondary" data-toggle="collapse" data-target="#search-area">
+        <i class="btn-icon mr-1 fas fa-angle-up"></i>
+        <span class="btn-text">Hide Search</span>
+    </button>
+</div>
+<div id="search-area" class="row px-2 collapse show">
+    <!-- TODO: make this collapsible -->
+    <div class="col-md-6">
+        <div id="col-1" class="form-group">
+            <label for="select-1">Type:</label>
+            <select id="select-1" class="form-control">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div id="col-2" class="form-group">
+            <label for="select-2">Focus:</label>
+            <select id="select-2" class="form-control">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div id="col-3" class="form-group">
+            <label for="select-3">Difficulty:</label>
+            <select id="select-3" class="form-control">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div id="col-name" class="form-group">
+            <label for="select-name">Name:</label>
+            <input id="select-name" class="form-control" type="text"></input>
+        </div>
+    </div>
+</div>
 <table id="workouts-table" class="table">
     <thead>
         <tr>
@@ -114,10 +154,9 @@
                 });
             });
         <?php endif ?>
-        $('#workouts-table').DataTable({
+        let table = $('#workouts-table').DataTable({
             ordering: false,
             lengthChange: false,
-            stateSave: true,
             searching: true,
             drawCallback: function() {
                 visibleWorkouts = [];
@@ -127,6 +166,30 @@
                     visibleWorkouts.push($(this).attr('id'));
                 });
             }
+        });
+        /* build searchfield for name-column */
+        table.columns([0]).every(function() {
+            let column = this;
+            let input = $('#select-name').on('keyup', function() {
+                let val = $.fn.dataTable.util.escapeRegex(
+                    $(this).val()
+                );
+                column.search(val ? val : '', true, false).draw();
+            });
+        });
+        /* build dropdowns for type, focus & difficulty */
+        table.columns([1, 2, 3]).every(function() {
+            let column = this;
+            let index = column[0][0];
+            let select = $('#select-' + index).on('change', function () {
+                let val = $.fn.dataTable.util.escapeRegex(
+                    $(this).val()
+                );
+                column.search(val ? '^' + val + '$' : '', true, false).draw();
+            });
+            column.data().unique().sort().each(function(d, j) {
+                select.append('<option value="' + d + '">' + d + '</option>')
+            });
         });
     });
 </script>
