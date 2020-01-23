@@ -48,6 +48,16 @@ body {
     border-top: none;
     padding-top: 0;
 }
+@media screen and (min-width: 576px) {
+    #app-wrapper {
+        margin-top: 1rem;
+    }
+    #app-wrapper .navbar {
+        border-top-left-radius: .25rem;
+        border-top-right-radius: .25rem;
+    }
+}
+
 @media screen and (max-width: 767px) {
     .container {
         padding-left: 0;
