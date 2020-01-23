@@ -73,6 +73,7 @@ wizard.context = {
         $('#training-day-subtype').text(newContext.name);
         wizard.find('.active').removeClass('active');
         wizard.find(('#' + newContext.id)).addClass('active');
+        wizard.find('.modal-body').removeClass('table-select');
         if(newContext.mainPanel) {
             $('#main-control').removeClass('d-none');
             $('#sub-control').addClass('d-none');
@@ -105,6 +106,7 @@ wizard.workoutType = {
     set: (workoutType) => {
         wizard.find('.active').removeClass('active');
         $('.workout-type.active').removeClass('active');
+        wizard.find('.modal-body').addClass('table-select');
         $('#' + workoutType).addClass('active');
     }
 }

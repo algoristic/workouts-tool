@@ -16,6 +16,13 @@
 .training-skipped-1 {
     background: #fff2cc !important;
 }
+.training-day:hover {
+    cursor: pointer;
+}
+.modal-body.table-select {
+    padding-left: 0;
+    padding-right: 0;
+}
 .use-workout {
     cursor: pointer;
 }
