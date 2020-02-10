@@ -96,6 +96,7 @@ CREATE TABLE routines(
     day INT(6) UNSIGNED,
     done BOOLEAN DEFAULT 0,
     skipped BOOLEAN DEFAULT 0,
+    active BOOLEAN DEFAULT 1,
     pre_training_id INT(6) UNSIGNED,
     main_training_id INT(6) UNSIGNED,
     post_training_id INT(6) UNSIGNED,
