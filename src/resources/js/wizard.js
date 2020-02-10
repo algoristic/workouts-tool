@@ -144,6 +144,29 @@ wizard.loadTraining = (training) => {
     wizard.context.set(context.overview);
     $('#cancel-changes, #save-changes').addClass('d-none');
     $('#delete').removeClass('d-none');
+    let active = training.hasClass('training-active-1');
+    let checkbox = $('#training-active');
+    if(active) {
+        checkbox.prop('checked', true);
+    } else {
+        checkbox.prop('checked', false);
+    }
+    checkbox.click(function() {
+        let id = wizard.id.get();
+        let checked = checkbox.prop('checked');
+        let row = $('tr[training-day-id="' + id + '"]');
+        if(checked) {
+            api.activateTraining(id, function(response) {
+                row.removeClass('training-active-0');
+                row.addClass('training-active-1');
+            });
+        } else {
+            api.deactivateTraining(id, function(response) {
+                row.removeClass('training-active-1');
+                row.addClass('training-active-0');
+            });
+        }
+    });
     if(training.attr('pre-training-id')) {
         wizard.overview('warmup', training, 'pre');
     } else {

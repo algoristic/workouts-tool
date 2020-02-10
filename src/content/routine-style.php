@@ -10,10 +10,13 @@
 .add-btn-text {
     font-size: 1.5rem;
 }
-.training-done-1 {
+.training-active-0 {
+    opacity: .25;
+}
+.training-done-1:not(.training-active-0) {
     background: #d5f6dd;
 }
-.training-skipped-1 {
+.training-skipped-1:not(.training-active-0) {
     background: #fff2cc !important;
 }
 .training-day:hover {
@@ -23,7 +26,7 @@
     .modal-body.table-select {
         padding-left: 0;
         padding-right: 0;
-    }    
+    }
 }
 .use-workout {
     cursor: pointer;

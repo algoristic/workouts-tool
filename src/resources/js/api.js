@@ -16,6 +16,17 @@ api = {
             'name': name
         }, handler);
     },
+    activateTraining: (trainingId, handler) => {
+        api.callEnpoint('training/setActive', {
+            'trainingId': trainingId
+        }, handler);
+    },
+    deactivateTraining: (trainingId, handler) => {
+        api.callEnpoint('training/setActive', {
+            'trainingId': trainingId,
+            'inactive': true
+        }, handler);
+    },
     deleteSubWorkout: (trainingId, trainingPosition, handler) => {
         api.callEnpoint('training/deleteSubWorkout', {
             'trainingId': trainingId,

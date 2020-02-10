@@ -97,6 +97,7 @@ function getAllTrainingDays() {
             r.day AS day,
             r.done AS done,
             r.skipped AS skipped,
+            r.active AS active,
             r.pre_training_id AS pre_training_id,
             pre.category AS pre_training_category,
             r.main_training_id AS main_training_id,
@@ -384,6 +385,7 @@ function userHasRoutines() {
         WHERE
             r.user = "' . $user . '" AND
             r.done = 1 AND
+            r.active = 1 AND
             r.last_done = CURRENT_DATE
     ')->num_rows == 0;
     return ($userHasRoutines && $lastRoutineNotToday);
@@ -400,6 +402,7 @@ function getOpenRoutines() {
         FROM
             routines r
         WHERE
+            r.active = True AND
             r.done = False AND
             r.user = "' . $user . '"
         ORDER BY
@@ -416,6 +419,7 @@ function lastDoneTrainingWasToday() {
         FROM
             routines r
         WHERE
+            r.active = True AND
             r.done = True AND
             r.user = "' . $user . '"
         ORDER BY
@@ -543,6 +547,28 @@ function skipRoutine($routineId) {
             r.done = 1,
             r.skipped = 1,
             r.last_done = CURRENT_DATE()
+        WHERE
+            r.id = ' . $routineId . '
+    ');
+}
+
+function deactivate($routineId) {
+    query('
+        UPDATE
+            routines r
+        SET
+            r.active = 0
+        WHERE
+            r.id = ' . $routineId . '
+    ');
+}
+
+function activate($routineId) {
+    query('
+        UPDATE
+            routines r
+        SET
+            r.active = 1
         WHERE
             r.id = ' . $routineId . '
     ');

@@ -15,7 +15,7 @@
                     pre-training-id="<?php echo $trainingDay['pre_training_id'] ?>"
                     main-training-id="<?php echo $trainingDay['main_training_id'] ?>"
                     post-training-id="<?php echo $trainingDay['post_training_id'] ?>"
-                    class="training-day training-done-<?php echo $trainingDay['done'] ?> training-skipped-<?php echo $trainingDay['skipped'] ?>">
+                    class="training-day training-active-<?php echo $trainingDay['active'] ?> training-done-<?php echo $trainingDay['done'] ?> training-skipped-<?php echo $trainingDay['skipped'] ?>">
                     <td class="training-day-day"><?php echo $trainingDay['day'] ?></td>
                     <td class="training-day-name"><?php echo $trainingDay['name'] ?></td>
                 </tr>
@@ -42,6 +42,11 @@
                         <div class="form-group">
                             <label for="training-day-name">Name:</label>
                             <input id="training-day-name" type="text" class="form-control" placeholder="Enter name for your training day">
+                        </div>
+                        <div class="form-check">
+                            <label for="training-active" class="form-check-label">
+                                <input id="training-active" type="checkbox" class="form-check-input">Active
+                            </label>
                         </div>
                         <p>Warmup</p>
                         <div id="warmup-overview" class="d-none row">
