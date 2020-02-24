@@ -9,6 +9,7 @@ $isLastWorkout = False;
 $link = '';
 $day = Null;
 $days = Null;
+$title = '';
 if(userHasRoutines()) {
     $routines = getOpenRoutines();
     if($routines->num_rows < 1) {
@@ -18,6 +19,7 @@ if(userHasRoutines()) {
         }
     }
     $routine = $routines->fetch_assoc();
+    $title = $routine['name'];
     $routineId = $routine['id'];
     $pre_id = $routine['pre'];
     $main_id = $routine['main'];
@@ -36,7 +38,9 @@ if(userHasRoutines()) {
                 continue;
             } else {
                 $training = getTraining($trainingId)->fetch_assoc();
-                if($training['done']) {
+                $last_done = $training['last_done'];
+                $now = date('yy-m-d');
+                if($training['done'] && ($now === $last_done)) {
                     continue;
                 } else {
                     $isFinished = False;
@@ -84,7 +88,10 @@ if(userHasRoutines()) {
 <div id="panel" class="tab-content text-center">
     <div class="tab-pane active">
         <div id="head" class="text-left ml-2">
-
+            <h4>
+                <span><?php echo $title ?></span><br>
+                <small id="head-text"></small>
+            </h4>
         </div>
         <hr>
         <div id="content">

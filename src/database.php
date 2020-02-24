@@ -396,6 +396,7 @@ function getOpenRoutines() {
     return query('
         SELECT
             r.id AS id,
+            r.name AS name,
             r.pre_training_id AS pre,
             r.main_training_id AS main,
             r.post_training_id AS post
@@ -478,7 +479,8 @@ function getTraining($trainingId) {
     return query('
         SELECT
             t.category AS category,
-            t.done AS done
+            t.done AS done,
+            t.last_done AS last_done
         FROM
             trainings t
         WHERE
@@ -509,7 +511,8 @@ function setTrainingDone($trainingId) {
         UPDATE
             trainings t
         SET
-            t.done = True
+            t.done = True,
+            t.last_done = CURRENT_DATE()
         WHERE
             t.id = ' . $trainingId . '
     ');

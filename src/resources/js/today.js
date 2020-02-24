@@ -174,9 +174,7 @@ displayTraining = (trainingVar) => {
         month: 'long',
         year: 'numeric'
     };
-    $('<h3/>', {
-        html: (currentTraining.title + '<small class="ml-2 text-secondary">(' + (new Date().toLocaleString('en-US', options)) + ')</small>')
-    }).appendTo($('#head'));
+    $('#head-text').text(currentTraining.title);
 }
 
 $(function() {

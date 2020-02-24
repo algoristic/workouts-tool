@@ -54,6 +54,7 @@ CREATE TABLE trainings(
     id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     category VARCHAR(255) NOT NULL,
     done BOOLEAN DEFAULT 0,
+    last_done DATE,
     skipped BOOLEAN DEFAULT 0
 );
 CREATE TABLE single_workouts(
