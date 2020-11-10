@@ -93,7 +93,7 @@ api = {
             firstElem = false;
         })
         $.ajax({
-            url: ('https://workout.marco-leweke.de/api/' + endpoint)
+            url: ('https://workout.algoristic.de/api/' + endpoint)
         }).done((response) => {
             if(response.status === 'Error') {
                 alert("An internal error occurred: Please reload the application!")
