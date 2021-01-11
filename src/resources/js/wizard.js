@@ -1,6 +1,6 @@
 user = sessionStorage["username"];
 if(user === undefined) {
-    window.location.replace('https://workout.marco-leweke.de/logout');
+    window.location.replace('https://workout.algoristic.de/logout');
 }
 
 mode = {
