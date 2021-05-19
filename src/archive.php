@@ -41,7 +41,7 @@ function archiveProgramData($name, $url_name, $days) {
                         if($foundCombination) {
                             break;
                         }
-                        foreach (array('web', 'pages', '2018', '2019', '2020') as $testAppendix) {
+                        foreach (array('web', 'pages', '2018', '2019', '2020', '2021') as $testAppendix) {
                             //darebee use multiple different appendices here, which are impossible to be determined before...
                             $original = 'https://darebee.com/images/programs/' . $url_name . '/' . $testAppendix . '/' . $testImageName . $urlDayAppendix . '.jpg';
                             if($debug) {
