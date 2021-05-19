@@ -17,8 +17,9 @@ function isActivePage($page) {
 
 function authenticate() {
     $users = array(
+        'test' => 'Test1234',
         'marco' => 'Test1234',
-        'pia' => 'TestLol'
+        'pia' => 'Test1234'
     );
     if(isset($_SESSION['user_id'])) {
         if(empty($_GET['page'])) {
